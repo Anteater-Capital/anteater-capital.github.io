@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &mdash; Anteater Capital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafaf8;
+      --white: #ffffff;
+      --navy: #1a2d4f;
+      --blue: #2a52be;
+      --text: #111827;
+      --mid: #374151;
+      --muted: #6b7280;
+      --light: #9ca3af;
+      --border: #e5e7eb;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --hover-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    nav {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 54px;
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .nav-mark {
+      width: 26px; height: 26px; background: var(--navy); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .nav-logo-img { height: 26px; width: 26px; object-fit: contain; display: block; }
+    .nav-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    nav ul { list-style: none; display: flex; gap: 0.2rem; }
+    nav ul a {
+      font-size: 0.83rem; font-weight: 500; color: var(--muted);
+      padding: 0.3rem 0.7rem; border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    nav ul a:hover { color: var(--text); background: #f3f4f6; text-decoration: none; }
+    nav ul a.active { color: var(--text); background: #f3f4f6; }
+
+    .page-header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 0 2rem;
+    }
+    .page-header-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+    }
+    .page-header-logo {
+      height: 110px; width: auto; opacity: 0.88; flex-shrink: 0;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));
+    }
+    @media(max-width: 600px) { .page-header-logo { height: 72px; } }
+
+    .wide { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.5rem;
+    }
+
+    .page-header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.4rem; }
+    .page-header p { color: var(--muted); font-size: 0.92rem; }
+
+    .content { padding: 3rem 0 5rem; }
+
+    p { color: var(--mid); margin-bottom: 0.9rem; font-size: 0.92rem; line-height: 1.8; }
+    p:last-child { margin-bottom: 0; }
+
+    h2 {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .snum { font-size: 0.68rem; font-weight: 600; color: var(--light); letter-spacing: 0.08em; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+    /* TRACKS */
+    .track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+    .track-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
+      padding: 1.4rem; box-shadow: var(--card-shadow);
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .track-card:hover { box-shadow: var(--hover-shadow); transform: translateY(-2px); border-color: #c7d2e8; }
+
+    .track-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: #f0f4ff; display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; margin-bottom: 0.85rem;
+    }
+    .track-card h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .track-card p { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.6; }
+
+    /* FOUNDER */
+    .founder-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 16px;
+      padding: 2rem; box-shadow: var(--card-shadow);
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      max-width: 600px;
+    }
+
+    .avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #dbeafe; color: #1e40af;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    .founder-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.1rem; }
+    .founder-role { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.65rem; }
+    .founder-bio { font-size: 0.875rem; color: var(--mid); line-height: 1.75; margin: 0; }
+
+    .chip-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.8rem; }
+    .chip {
+      font-size: 0.68rem; font-weight: 500;
+      background: #f3f4f6; color: var(--muted);
+      padding: 0.12rem 0.55rem; border-radius: 4px;
+    }
+
+    /* JOIN */
+    .join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .join-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
+      padding: 1.35rem 1.5rem; box-shadow: var(--card-shadow);
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .join-card:hover { box-shadow: var(--hover-shadow); border-color: #c7d2e8; }
+
+    .join-icon {
+      width: 38px; height: 38px; border-radius: 10px; background: #f0f4ff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .join-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .join-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+    .join-tbd { font-size: 0.72rem; color: var(--light); font-style: italic; margin-top: 0.2rem; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 3rem;
+      max-width: 1140px; margin: 0 auto;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+      font-size: 0.75rem; color: var(--light);
+    }
+
+    @media(max-width: 900px) { .track-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width: 600px) {
+      .wide { padding: 0 1.25rem; } nav { padding: 0 1.25rem; }
+      .track-grid { grid-template-columns: 1fr; }
+      .join-grid { grid-template-columns: 1fr; }
+      .founder-card { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img class="nav-logo-img" src="images/uci-logo.png" alt="UCI"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="nav-mark" style="display:none">AC</div>
+    <span class="nav-name">Anteater Capital</span>
+  </a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="wide">
+    <div class="page-header-inner">
+      <div>
+        <div class="eyebrow">About</div>
+        <h1>Anteater Capital</h1>
+        <p>A new student organization at UC Irvine focused on algorithmic and quantitative trading.</p>
+      </div>
+      <img class="page-header-logo" src="images/uci-logo.png" alt="UCI Anteater">
+    </div>
+  </div>
+</div>
+
+<div class="wide">
+<div class="content">
+
+  <p>
+    Anteater Capital was started to give UCI students a place to seriously study how financial markets work — not just in theory, but by building real strategies and running them. We operate like a small research team: structured, documented, and collaborative.
+  </p>
+  <p>
+    The club is open to everyone regardless of major or background. Whether you're interested in the math, the engineering, the economics, or just curious about markets, there's a place for you here.
+  </p>
+
+  <hr class="divider">
+
+  <h2><span class="snum">01</span> Tracks</h2>
+  <div class="track-grid">
+    <div class="track-card">
+      <div class="track-icon">&#128202;</div>
+      <h3>Research</h3>
+      <p>Develop and backtest trading strategies. Write up your process and present results to the group for peer review.</p>
+    </div>
+    <div class="track-card">
+      <div class="track-icon">&#128187;</div>
+      <h3>Engineering</h3>
+      <p>Build the club's infrastructure — backtesting engines, data pipelines, paper trading integrations, and dashboards.</p>
+    </div>
+    <div class="track-card">
+      <div class="track-icon">&#127979;</div>
+      <h3>Education</h3>
+      <p>Run weekly sessions and create learning resources for members who are newer to quantitative finance.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2><span class="snum">02</span> Founder</h2>
+  <div class="founder-card">
+    <div class="avatar">JD</div>
+    <div>
+      <div class="founder-name">John Doe</div>
+      <div class="founder-role">Founder &amp; President</div>
+      <p class="founder-bio">
+        Computer Engineering student and ML researcher. 
+      </p>
+      <div class="chip-row">
+        <span class="chip">ML/AI</span>
+        <span class="chip">Python</span>
+        <span class="chip">Rust</span>
+		<span class="chip">UCI Engineering</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 id="join"><span class="snum">03</span> Get Involved</h2>
+  <p style="margin-bottom: 1.5rem;">The club is just getting started. Come to a meeting or reach out — all skill levels welcome.</p>
+
+  <div class="join-grid">
+    <div class="join-card">
+      <div class="join-icon">&#128197;</div>
+      <div>
+        <div class="join-name">General Meeting</div>
+        <div class="join-detail">Weekly, open to all UCI students</div>
+        <div class="join-tbd">Day, time &amp; location TBD</div>
+      </div>
+    </div>
+    <div class="join-card">
+      <div class="join-icon">&#128202;</div>
+      <div>
+        <div class="join-name">Strategy Workshop</div>
+        <div class="join-detail">Bi-weekly deep dives on active research</div>
+        <div class="join-tbd">Schedule TBD</div>
+      </div>
+    </div>
+    <div class="join-card">
+      <div class="join-icon">&#128172;</div>
+      <div>
+        <div class="join-name">Discord</div>
+        <div class="join-detail">Discussion, resources, and announcements</div>
+        <div class="join-tbd">Link coming soon</div>
+      </div>
+    </div>
+    <div class="join-card">
+      <div class="join-icon">&#9993;&#65039;</div>
+      <div>
+        <div class="join-name">Email</div>
+        <div class="join-detail"><a href="mailto:anteatercapital@uci.edu">anteatercapital@uci.edu</a></div>
+        <div class="join-detail" style="margin-top:0.25rem;">Questions, interest, or want to collaborate</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+  <span style="display:flex; align-items:center; gap:0.6rem;">
+    <img src="images/uci-logo.png" alt="UCI" style="height:20px; opacity:0.45; filter:grayscale(1);"
+         onerror="this.style.display='none'">
+    Anteater Capital &middot; UC Irvine
+  </span>
+  <span>Student organization &middot; Not affiliated with UCI Financial Services</span>
+</footer>
+
+</body>
+</html>

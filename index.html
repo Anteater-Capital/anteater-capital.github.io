@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anteater Capital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #fafaf8;
+      --white: #ffffff;
+      --navy: #1a2d4f;
+      --blue: #2a52be;
+      --text: #111827;
+      --mid: #374151;
+      --muted: #6b7280;
+      --light: #9ca3af;
+      --border: #e5e7eb;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --hover-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 54px;
+      position: sticky; top: 0; z-index: 50;
+    }
+
+    .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .nav-mark {
+      width: 26px; height: 26px; background: var(--navy); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .nav-logo-img { height: 26px; width: 26px; object-fit: contain; display: block; }
+    .nav-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+    nav ul { list-style: none; display: flex; gap: 0.2rem; }
+    nav ul a {
+      font-size: 0.83rem; font-weight: 500; color: var(--muted);
+      padding: 0.3rem 0.7rem; border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    nav ul a:hover { color: var(--text); background: #f3f4f6; text-decoration: none; }
+    nav ul a.active { color: var(--text); background: #f3f4f6; }
+
+    .wide { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
+
+    /* HERO */
+    .hero-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 0 2.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* animated chart line in hero background */
+    .hero-chart {
+      position: absolute;
+      inset: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .chart-path {
+      fill: none;
+      stroke: var(--navy);
+      stroke-width: 1.5;
+      opacity: 0.18;
+      stroke-dasharray: 2200;
+      stroke-dashoffset: 2200;
+      animation: draw-chart 3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    }
+
+    .chart-fill {
+      animation: fade-fill 3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+    }
+
+    @keyframes draw-chart {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes fade-fill {
+      0% { opacity: 0; }
+      60% { opacity: 0; }
+      100% { opacity: 0.025; }
+    }
+
+    /* hero two-column */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* hero text fade-in */
+    .hero-content > * {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: hero-in 0.55s ease forwards;
+    }
+    .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.22s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.34s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.46s; }
+
+    @keyframes hero-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* terminal window */
+    .hero-visual {
+      opacity: 0;
+      animation: hero-in 0.7s ease 0.55s forwards;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #donut {
+      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      font-size: 0.72rem;
+      line-height: 1.22;
+      color: #6b7a99;
+      white-space: pre;
+      letter-spacing: 0.04em;
+      user-select: none;
+      display: block;
+    }
+
+    @media(max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+    }
+
+    /* scroll fade-up */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 50px;
+      padding: 0.22rem 0.8rem;
+      font-size: 0.7rem; font-weight: 600; color: #15803d;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+    .pulse { width: 5px; height: 5px; border-radius: 50%; background: #16a34a; animation: pulse 2.5s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    h1 {
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.22;
+      color: var(--text); margin-bottom: 0.6rem;
+    }
+
+    .hero-desc {
+      font-size: 1rem; color: var(--mid); line-height: 1.75;
+      margin-bottom: 1.35rem; max-width: 560px;
+    }
+
+    .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-block; background: var(--navy); color: #fff;
+      padding: 0.55rem 1.25rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 600;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #243f72; transform: translateY(-1px); text-decoration: none; }
+
+    .btn-secondary {
+      display: inline-block; background: transparent; color: var(--mid);
+      padding: 0.55rem 1.25rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; border: 1px solid var(--border);
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-secondary:hover { border-color: #9ca3af; color: var(--text); text-decoration: none; }
+
+    /* MISSION STRIP */
+    .mission-strip {
+      background: var(--navy);
+      padding: 2rem 0;
+    }
+    .mission-grid {
+      display: flex; align-items: flex-start; gap: 0;
+    }
+    .mission-item {
+      flex: 1; padding: 0.25rem 2rem;
+    }
+    .mission-item:first-child { padding-left: 0; }
+    .mission-item:last-child { padding-right: 0; }
+    .mission-label {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      margin-bottom: 0.35rem;
+    }
+    .mission-text {
+      font-size: 0.88rem; color: rgba(255,255,255,0.82); line-height: 1.7;
+    }
+    .mission-divider {
+      width: 1px; background: rgba(255,255,255,0.1);
+      align-self: stretch; flex-shrink: 0; margin: 0.25rem 0;
+    }
+    @media(max-width: 700px) {
+      .mission-grid { flex-direction: column; gap: 1rem; }
+      .mission-divider { display: none; }
+      .mission-item { padding: 0 !important; }
+    }
+
+    /* SHARED SECTION */
+    .section { padding: 2.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--border); }
+
+    h2 {
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      margin-bottom: 1.1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .snum { font-size: 0.68rem; font-weight: 600; color: var(--light); letter-spacing: 0.08em; }
+
+    /* WHAT WE DO */
+    .wwd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .wwd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .wwd-half-label {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--light);
+      margin-bottom: 0.75rem;
+    }
+
+    .wwd-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
+      padding: 1.25rem; box-shadow: var(--card-shadow);
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .wwd-card:hover { box-shadow: var(--hover-shadow); transform: translateY(-2px); border-color: #c7d2e8; }
+
+    .wwd-icon {
+      width: 34px; height: 34px; background: #f0f4ff; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; margin-bottom: 0.8rem;
+    }
+    .wwd-card h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .wwd-card p { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.6; }
+
+    /* HOW IT WORKS */
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 2px solid var(--border); border-radius: 16px; overflow: hidden; }
+
+    .step {
+      background: var(--white); padding: 1.75rem 1.5rem;
+      position: relative;
+    }
+
+    .step-num {
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--light);
+      margin-bottom: 0.7rem;
+    }
+
+    .step h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.25; }
+    .step p { font-size: 0.83rem; color: var(--muted); margin: 0; line-height: 1.65; }
+
+    .step-arrow {
+      position: absolute; right: -1px; top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid var(--bg);
+      z-index: 1;
+    }
+
+    .step:last-child .step-arrow { display: none; }
+
+    .step-tag {
+      display: inline-block;
+      margin-top: 0.85rem;
+      font-size: 0.7rem; font-weight: 600;
+      padding: 0.2rem 0.65rem; border-radius: 50px;
+    }
+
+    .tag-green { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .tag-blue  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .tag-navy  { background: #f0f4ff; color: var(--navy); border: 1px solid #c7d2fe; }
+
+    /* MEETINGS */
+    .meeting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .meeting-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
+      padding: 1.35rem 1.5rem; box-shadow: var(--card-shadow);
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .meeting-card:hover { box-shadow: var(--hover-shadow); border-color: #c7d2e8; }
+
+    .meeting-icon {
+      width: 38px; height: 38px; border-radius: 10px; background: #f0f4ff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .meeting-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .meeting-detail { font-size: 0.8rem; color: var(--muted); }
+
+    .tbd-note {
+      font-size: 0.72rem; color: var(--light); font-style: italic; margin-top: 0.25rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.75rem 3rem;
+      max-width: 1140px; margin: 3rem auto 0;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+      font-size: 0.75rem; color: var(--light);
+    }
+
+    @media(max-width: 900px) { .wwd-grid { grid-template-columns: 1fr 1fr; } .wwd-grid-2 { grid-template-columns: 1fr 1fr; } .steps { grid-template-columns: 1fr; } }
+    @media(max-width: 600px) {
+      .wide { padding: 0 1.25rem; } nav { padding: 0 1.25rem; }
+      .wwd-grid { grid-template-columns: 1fr; } .meeting-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img class="nav-logo-img" src="images/uci-logo.png" alt="UCI"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="nav-mark" style="display:none">AC</div>
+    <span class="nav-name">Anteater Capital</span>
+  </a>
+  <ul>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <!-- Brownian motion fan: all paths originate from the same point and diverge -->
+  <svg class="hero-chart" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
+
+    <!-- grid -->
+    <line x1="0" y1="64"  x2="1200" y2="64"  stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
+    <line x1="0" y1="128" x2="1200" y2="128" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
+    <line x1="0" y1="192" x2="1200" y2="192" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
+    <line x1="0" y1="256" x2="1200" y2="256" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
+    <line x1="200"  y1="0" x2="200"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+    <line x1="400"  y1="0" x2="400"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+    <line x1="600"  y1="0" x2="600"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+    <line x1="800"  y1="0" x2="800"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+    <line x1="1000" y1="0" x2="1000" y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+
+    <!-- 16 brownian paths, all from (0,160), points every 30px for jagged look -->
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+      <!-- very strong up, ends ~8 — green -->
+      <polyline stroke="#22a85c" stroke-width="1.1" opacity="0.16"
+        points="0,160 30,153 60,158 90,148 120,143 150,150 180,140 210,132 240,138 270,128 300,122 330,130 360,120 390,114 420,108 450,115 480,105 510,98 540,105 570,95 600,88 630,94 660,84 690,78 720,85 750,75 780,68 810,74 840,64 870,58 900,65 930,55 960,48 990,55 1020,45 1050,38 1080,44 1110,35 1140,28 1170,18 1200,8"/>
+
+      <!-- strong up, ends ~22 — green -->
+      <polyline stroke="#22a85c" stroke-width="1" opacity="0.14"
+        points="0,160 30,156 60,162 90,152 120,148 150,155 180,145 210,138 240,144 270,134 300,128 330,135 360,126 390,120 420,115 450,122 480,112 510,106 540,112 570,102 600,96 630,103 660,93 690,88 720,95 750,85 780,78 810,85 840,75 870,70 900,76 930,66 960,60 990,67 1020,57 1050,52 1080,58 1110,48 1140,42 1170,32 1200,22"/>
+
+      <!-- moderate up, ends ~42 — green -->
+      <polyline stroke="#22a85c" stroke-width="1" opacity="0.13"
+        points="0,160 30,158 60,164 90,155 120,152 150,158 180,149 210,144 240,150 270,140 300,135 330,142 360,133 390,128 420,124 450,130 480,122 510,116 540,122 570,113 600,108 630,115 660,106 690,101 720,108 750,98 780,93 810,100 840,91 870,86 900,92 930,82 960,77 990,84 1020,75 1050,70 1080,76 1110,67 1140,62 1170,52 1200,42"/>
+
+      <!-- moderate up, ends ~62 — green -->
+      <polyline stroke="#22a85c" stroke-width="1" opacity="0.12"
+        points="0,160 30,157 60,163 90,156 120,153 150,160 180,153 210,148 240,155 270,147 300,141 330,149 360,141 390,136 420,132 450,139 480,132 510,126 540,132 570,124 600,118 630,125 660,117 690,112 720,119 750,111 780,106 810,113 840,105 870,100 900,106 930,98 960,93 990,100 1020,93 1050,88 1080,94 1110,87 1140,80 1170,72 1200,62"/>
+
+      <!-- slight up, ends ~92 — green -->
+      <polyline stroke="#22a85c" stroke-width="1" opacity="0.12"
+        points="0,160 30,158 60,165 90,158 120,156 150,162 180,156 210,151 240,157 270,151 300,146 330,152 360,146 390,141 420,138 450,144 480,138 510,133 540,139 570,132 600,127 630,133 660,127 690,122 720,129 750,122 780,117 810,124 840,118 870,113 900,119 930,113 960,108 990,115 1020,109 1050,104 1080,110 1110,104 1140,98 1170,95 1200,92"/>
+
+      <!-- slight up, ends ~115 — green -->
+      <polyline stroke="#22a85c" stroke-width="1" opacity="0.11"
+        points="0,160 30,159 60,165 90,159 120,157 150,163 180,158 210,153 240,159 270,154 300,149 330,155 360,150 390,145 420,143 450,149 480,144 510,139 540,145 570,139 600,134 630,140 660,135 690,130 720,136 750,130 780,126 810,132 840,127 870,122 900,128 930,123 960,119 990,125 1020,120 1050,115 1080,121 1110,116 1140,112 1170,114 1200,115"/>
+
+      <!-- barely up / flat, ends ~132 — neutral navy -->
+      <polyline stroke="#1a2d4f" stroke-width="1" opacity="0.10"
+        points="0,160 30,160 60,166 90,160 120,159 150,165 180,160 210,155 240,161 270,156 300,152 330,158 360,154 390,149 420,147 450,153 480,149 510,144 540,150 570,145 600,141 630,147 660,143 690,138 720,144 750,139 780,135 810,141 840,137 870,132 900,138 930,134 960,130 990,136 1020,132 1050,128 1080,134 1110,130 1140,127 1170,130 1200,132"/>
+
+      <!-- flat, ends ~158 — neutral navy -->
+      <polyline stroke="#1a2d4f" stroke-width="1" opacity="0.09"
+        points="0,160 30,162 60,168 90,162 120,161 150,167 180,162 210,158 240,163 270,159 300,155 330,161 360,157 390,153 420,151 450,157 480,153 510,149 540,155 570,151 600,147 630,153 660,149 690,145 720,151 750,147 780,143 810,149 840,145 870,141 900,147 930,143 960,140 990,146 1020,143 1050,139 1080,145 1110,141 1140,139 1170,148 1200,158"/>
+
+      <!-- slight down, ends ~178 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.10"
+        points="0,160 30,162 60,157 90,163 120,161 150,156 180,162 210,158 240,162 270,158 300,163 330,158 360,164 390,160 420,165 450,160 480,166 510,161 540,166 570,162 600,167 630,163 660,168 690,164 720,170 750,165 780,170 810,166 840,172 870,168 900,174 930,170 960,175 990,170 1020,175 1050,171 1080,176 1110,172 1140,177 1170,174 1200,178"/>
+
+      <!-- slight down, ends ~198 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.11"
+        points="0,160 30,163 60,158 90,165 120,163 150,169 180,163 210,170 240,165 270,171 300,166 330,173 360,168 390,174 420,170 450,176 480,171 510,178 540,173 570,179 600,175 630,181 660,176 690,182 720,178 750,184 780,180 810,186 840,182 870,188 900,184 930,190 960,186 990,192 1020,188 1050,194 1080,190 1110,196 1140,192 1170,196 1200,198"/>
+
+      <!-- moderate down, ends ~228 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+        points="0,160 30,165 60,172 90,166 120,174 150,180 180,174 210,181 240,176 270,183 300,178 330,185 360,180 390,187 420,183 450,190 480,185 510,192 540,188 570,195 600,190 630,197 660,193 690,200 720,196 750,203 780,199 810,206 840,202 870,208 900,205 930,212 960,208 990,214 1020,210 1050,217 1080,214 1110,220 1140,216 1170,222 1200,228"/>
+
+      <!-- moderate down, ends ~252 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.11"
+        points="0,160 30,166 60,174 90,167 120,176 150,183 180,177 210,185 240,180 270,188 300,183 330,191 360,186 390,194 420,190 450,198 480,193 510,201 540,197 570,205 600,200 630,208 660,204 690,212 720,208 750,216 780,212 810,220 840,216 870,224 900,220 930,228 960,224 990,232 1020,228 1050,236 1080,232 1110,240 1140,237 1170,244 1200,252"/>
+
+      <!-- strong down, ends ~275 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+        points="0,160 30,167 60,176 90,169 120,179 150,187 180,181 210,190 240,185 270,194 300,190 330,199 360,194 390,203 420,199 450,208 480,204 510,213 540,209 570,218 600,214 630,223 660,219 690,228 720,225 750,234 780,230 810,239 840,236 870,245 900,241 930,250 960,247 990,256 1020,252 1050,261 1080,258 1110,267 1140,264 1170,271 1200,275"/>
+
+      <!-- strong down, ends ~295 — red -->
+      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+        points="0,160 30,168 60,178 90,171 120,181 150,190 180,184 210,194 240,189 270,199 300,195 330,205 360,200 390,210 420,206 450,216 480,212 510,222 540,218 570,228 600,224 630,234 660,230 690,240 720,237 750,247 780,243 810,253 840,250 870,260 900,257 930,267 960,264 990,274 1020,270 1050,280 1080,277 1110,287 1140,284 1170,291 1200,295"/>
+
+      <!-- very strong down, ends ~312 — red -->
+      <polyline stroke="#d44040" stroke-width="1.1" opacity="0.14"
+        points="0,160 30,170 60,182 90,174 120,185 150,195 180,188 210,199 240,194 270,205 300,201 330,212 360,207 390,218 420,214 450,225 480,221 510,232 540,228 570,239 600,235 630,246 660,242 690,253 720,250 750,261 780,257 810,268 840,265 870,276 900,272 930,283 960,280 990,291 1020,287 1050,298 1080,295 1110,306 1140,302 1170,308 1200,312"/>
+    </g>
+  </svg>
+
+  <div class="wide">
+    <div class="hero-inner">
+
+      <div class="hero-content">
+        <div class="status-pill">
+          <span class="pulse"></span>
+          Now Forming &mdash; Fall 2026
+        </div>
+        <h1>UCI's premier algorithmic trading club.</h1>
+        <p class="hero-desc">
+          Members write code, develop systematic trading strategies, and run them against a shared paper portfolio — learning quantitative finance by actually doing it. No prior experience needed.
+        </p>
+        <div class="btn-row">
+          <a href="about.html#join" class="btn-primary">Get Involved</a>
+          <a href="about.html" class="btn-secondary">Learn More</a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <pre id="donut"></pre>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip">
+  <div class="wide">
+    <div class="mission-grid">
+      <div class="mission-item">
+        <div class="mission-label">Quantitative Research</div>
+        <div class="mission-text">Members develop systematic trading strategies using statistical and probabilistic models — from signal discovery and factor research to rigorous backtesting. Every idea is validated before it ever touches the paper portfolio.</div>
+      </div>
+      <div class="mission-divider"></div>
+      <div class="mission-item">
+        <div class="mission-label">Trading Systems Engineering</div>
+        <div class="mission-text">We build the infrastructure that powers it all in Rust — low-latency execution engines, real-time market data pipelines, and robust order management systems. Fast, reliable, and production-grade from day one.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wide">
+
+  <!-- WHAT WE DO -->
+  <div class="section">
+    <h2><span class="snum">01</span> What we do</h2>
+
+    <div class="wwd-half">
+      <div class="wwd-half-label">Quantitative Research</div>
+      <div class="wwd-grid-2">
+        <div class="wwd-card fade-up" style="transition-delay:0s">
+          <div class="wwd-icon">&#128202;</div>
+          <h3>Statistical Signal Research</h3>
+          <p>Find and test quantitative signals in market data. Members develop alpha from scratch — momentum, mean-reversion, cross-sectional factors — and validate them rigorously before anything goes live.</p>
+        </div>
+        <div class="wwd-card fade-up" style="transition-delay:0.08s">
+          <div class="wwd-icon">&#128200;</div>
+          <h3>Backtesting &amp; Paper Trading</h3>
+          <p>Every strategy runs through a structured backtest and then paper trades against the club's shared portfolio. Results are tracked and reviewed openly week over week.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="wwd-half" style="margin-top: 1.5rem;">
+      <div class="wwd-half-label">Systems Engineering</div>
+      <div class="wwd-grid-2">
+        <div class="wwd-card fade-up" style="transition-delay:0.12s">
+          <div class="wwd-icon">&#9881;&#65039;</div>
+          <h3>Trading Systems in Rust</h3>
+          <p>Build low-latency execution and data infrastructure in Rust. Order routing, position management, and real-time market data handling — engineered for performance and reliability.</p>
+        </div>
+        <div class="wwd-card fade-up" style="transition-delay:0.2s">
+          <div class="wwd-icon">&#128640;</div>
+          <h3>Scalable Data Pipelines</h3>
+          <p>Design and maintain the systems that power the club's research — ingestion, normalization, and storage of price and alternative data at scale. The plumbing every quant fund depends on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <h2><span class="snum">02</span> How it works</h2>
+    <div class="steps fade-up">
+      <div class="step">
+        <div class="step-num">Phase 1</div>
+        <h3>Learn &amp; Build</h3>
+        <p>Pick a strategy idea, research the signal, and implement it in Python. We provide the infrastructure — data feeds, a backtesting framework, and weekly sessions to help you get started.</p>
+        <span class="step-tag tag-green">Hands-on from day one</span>
+        <div class="step-arrow"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">Phase 2</div>
+        <h3>Paper Trade Club Capital</h3>
+        <p>Once your backtest holds up, your strategy goes live against the club's shared paper portfolio. Performance is tracked, compared, and reviewed openly by the group every week.</p>
+        <span class="step-tag tag-blue">Real execution, zero risk</span>
+        <div class="step-arrow"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">Phase 3</div>
+        <h3>Deploy on Your Own</h3>
+        <p>Strategies that prove out over time can be deployed on your own brokerage account. The long-term goal is a pooled student fund — managed entirely by club members.</p>
+        <span class="step-tag tag-navy">Real capital, real returns</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- MEETINGS -->
+  <div class="section">
+    <h2><span class="snum">03</span> Meetings</h2>
+    <div class="meeting-grid">
+      <div class="meeting-card fade-up" style="transition-delay:0s">
+        <div class="meeting-icon">&#128197;</div>
+        <div>
+          <div class="meeting-name">General Meeting</div>
+          <div class="meeting-detail">Weekly &mdash; open to all students</div>
+          <div class="tbd-note">Day, time &amp; location TBD</div>
+        </div>
+      </div>
+      <div class="meeting-card fade-up" style="transition-delay:0.08s">
+        <div class="meeting-icon">&#128202;</div>
+        <div>
+          <div class="meeting-name">Strategy Workshop</div>
+          <div class="meeting-detail">Bi-weekly deep dives on active research</div>
+          <div class="tbd-note">Schedule TBD</div>
+        </div>
+      </div>
+      <div class="meeting-card fade-up" style="transition-delay:0.16s">
+        <div class="meeting-icon">&#128172;</div>
+        <div>
+          <div class="meeting-name">Discord</div>
+          <div class="meeting-detail">Ongoing discussion, resources, and announcements</div>
+          <div class="tbd-note">Link coming soon</div>
+        </div>
+      </div>
+      <div class="meeting-card fade-up" style="transition-delay:0.24s">
+        <div class="meeting-icon">&#9993;&#65039;</div>
+        <div>
+          <div class="meeting-name">Contact</div>
+          <div class="meeting-detail">Questions or want to get involved?</div>
+          <div class="meeting-detail" style="margin-top:0.2rem;"><a href="mailto:anteatercapital@uci.edu">anteatercapital@uci.edu</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span style="display:flex; align-items:center; gap:0.6rem;">
+    <img src="images/uci-logo.png" alt="UCI" style="height:20px; opacity:0.45; filter:grayscale(1);"
+         onerror="this.style.display='none'">
+    Anteater Capital &middot; UC Irvine
+  </span>
+  <span>Student organization &middot; Not affiliated with UCI Financial Services</span>
+</footer>
+
+<script>
+  /* ── SCROLL FADE-UPS ── */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  /* ── SPINNING DONUT ── */
+  // Classic ASCII donut — based on Andy Sloane's donut.c
+  (function() {
+    const el = document.getElementById('donut');
+    if (!el) return;
+
+    const W = 58, H = 28;
+    const chars = '.,-~:;=!*#$@';
+    let A = 0, B = 0;
+
+    function frame() {
+      const out  = new Array(W * H).fill(' ');
+      const zbuf = new Array(W * H).fill(0);
+
+      const sinA = Math.sin(A), cosA = Math.cos(A);
+      const sinB = Math.sin(B), cosB = Math.cos(B);
+
+      for (let theta = 0; theta < 6.28; theta += 0.055) {
+        const sinT = Math.sin(theta), cosT = Math.cos(theta);
+
+        for (let phi = 0; phi < 6.28; phi += 0.019) {
+          const sinP = Math.sin(phi), cosP = Math.cos(phi);
+
+          // circle in xz-plane
+          const cx = 2 + cosT;
+          const cy = sinT;
+
+          // 3D rotation
+          const x = cx * (cosB * cosP + sinA * sinB * sinP) - cy * cosA * sinB;
+          const y = cx * (sinB * cosP - sinA * cosB * sinP) + cy * cosA * cosB;
+          const z = 5 + cosA * cx * sinP + cy * sinA;
+          const ooz = 1 / z;
+
+          // project to screen
+          const xp = Math.round(W / 2 + 22 * ooz * x);
+          const yp = Math.round(H / 2 - 11 * ooz * y);
+
+          // luminance
+          const L = cosP * cosT * sinB
+                  - cosA * cosT * sinP
+                  - sinA * sinT
+                  + cosB * (cosA * sinT - cosT * sinA * sinP);
+
+          if (L > 0 && xp >= 0 && xp < W && yp >= 0 && yp < H) {
+            const idx = xp + yp * W;
+            if (ooz > zbuf[idx]) {
+              zbuf[idx] = ooz;
+              out[idx] = chars[Math.min(11, Math.floor(L * 8))];
+            }
+          }
+        }
+      }
+
+      let str = '';
+      for (let r = 0; r < H; r++) {
+        str += out.slice(r * W, r * W + W).join('') + '\n';
+      }
+      el.textContent = str;
+
+      A += 0.055;
+      B += 0.025;
+      requestAnimationFrame(frame);
+    }
+
+    frame();
+  })();
+</script>
+</body>
+</html>
