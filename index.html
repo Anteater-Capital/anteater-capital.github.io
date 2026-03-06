@@ -6,344 +6,311 @@
   <title>Anteater Capital</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --bg: #fafaf8;
-      --white: #ffffff;
-      --navy: #1a2d4f;
-      --blue: #2a52be;
-      --text: #111827;
-      --mid: #374151;
-      --muted: #6b7280;
-      --light: #9ca3af;
-      --border: #e5e7eb;
-      --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
-      --hover-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #eef0f7;
+      --border: rgba(0,0,0,0.08);
+      --border2: rgba(0,0,0,0.14);
+      --accent: #2563eb;
+      --green: #16a34a;
+      --text: #0a0e1a;
+      --mid: rgba(10,14,26,0.62);
+      --muted: rgba(10,14,26,0.42);
+      --mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
     }
 
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
-    a { color: var(--blue); text-decoration: none; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(37,99,235,0.055) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+    nav, .hero-wrap, .sponsors-strip, .wide, footer { position: relative; z-index: 1; }
+    a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     /* NAV */
     nav {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(245,246,250,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0 3rem;
       display: flex; align-items: center; justify-content: space-between;
-      height: 54px;
+      height: 52px;
       position: sticky; top: 0; z-index: 50;
     }
-
     .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
     .nav-mark {
-      width: 26px; height: 26px; background: var(--navy); border-radius: 6px;
+      width: 24px; height: 24px; background: var(--accent); border-radius: 5px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+      font-size: 0.58rem; font-weight: 800; color: #fff; flex-shrink: 0; letter-spacing: 0.05em;
     }
-    .nav-logo-img { height: 26px; width: 26px; object-fit: contain; display: block; }
-    .nav-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
-    nav ul { list-style: none; display: flex; gap: 0.2rem; }
+    .nav-logo-img { height: 24px; width: 24px; object-fit: contain; display: block; opacity: 0.85; }
+    .nav-name { font-size: 0.87rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+    nav ul { list-style: none; display: flex; gap: 0.1rem; }
     nav ul a {
-      font-size: 0.83rem; font-weight: 500; color: var(--muted);
-      padding: 0.3rem 0.7rem; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+      padding: 0.28rem 0.65rem; border-radius: 6px;
       transition: color 0.15s, background 0.15s;
     }
-    nav ul a:hover { color: var(--text); background: #f3f4f6; text-decoration: none; }
-    nav ul a.active { color: var(--text); background: #f3f4f6; }
+    nav ul a:hover { color: var(--text); background: rgba(0,0,0,0.05); text-decoration: none; }
+    nav ul a.active { color: var(--text); background: rgba(0,0,0,0.05); }
 
     .wide { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
 
     /* HERO */
     .hero-wrap {
-      background: var(--white);
+      background: linear-gradient(155deg, #ffffff 0%, #eef3ff 55%, #f0f5ff 100%);
       border-bottom: 1px solid var(--border);
-      padding: 1.25rem 0 1rem;
-      position: relative;
-      overflow: hidden;
+      padding: 4.5rem 0 4rem;
+      position: relative; overflow: hidden;
     }
-
-    /* animated chart line in hero background */
-    .hero-chart {
-      position: absolute;
-      inset: 0; width: 100%; height: 100%;
+    .hero-wrap::after {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 65%);
       pointer-events: none;
     }
-
-    .chart-path {
-      fill: none;
-      stroke: var(--navy);
-      stroke-width: 1.5;
-      opacity: 0.18;
-      stroke-dasharray: 2200;
-      stroke-dashoffset: 2200;
-      animation: draw-chart 3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    .hero-chart {
+      position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;
     }
-
-    .chart-fill {
-      animation: fade-fill 3s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
-    }
-
-    @keyframes draw-chart {
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes fade-fill {
-      0% { opacity: 0; }
-      60% { opacity: 0; }
-      100% { opacity: 0.025; }
-    }
-
-    /* hero two-column */
     .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;
     }
-
-    /* hero text fade-in */
     .hero-content > * {
-      opacity: 0;
-      transform: translateY(10px);
-      animation: hero-in 0.55s ease forwards;
+      opacity: 0; transform: translateY(12px); animation: hero-in 0.6s ease forwards;
     }
-    .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
-    .hero-content > *:nth-child(2) { animation-delay: 0.22s; }
-    .hero-content > *:nth-child(3) { animation-delay: 0.34s; }
-    .hero-content > *:nth-child(4) { animation-delay: 0.46s; }
-
-    @keyframes hero-in {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* terminal window */
+    .hero-content > *:nth-child(1) { animation-delay: 0.08s; }
+    .hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.32s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.44s; }
+    @keyframes hero-in { to { opacity: 1; transform: translateY(0); } }
     .hero-visual {
-      opacity: 0;
-      animation: hero-in 0.7s ease 0.55s forwards;
-      display: flex;
-      justify-content: flex-end;
+      opacity: 0; animation: hero-in 0.7s ease 0.5s forwards;
+      display: flex; justify-content: flex-end;
     }
 
     @keyframes donut-hue {
-      0%   { color: #2563ff; }
-      17%  { color: #00cc6a; }
-      33%  { color: #bb00ff; }
-      50%  { color: #ff6600; }
-      67%  { color: #ff1a1a; }
-      83%  { color: #00bfff; }
-      100% { color: #2563ff; }
+      0%   { color: #2563eb; }
+      17%  { color: #16a34a; }
+      33%  { color: #7c3aed; }
+      50%  { color: #ea580c; }
+      67%  { color: #dc2626; }
+      83%  { color: #0891b2; }
+      100% { color: #2563eb; }
+    }
+    #donut {
+      font-family: var(--mono);
+      font-size: 0.82rem; line-height: 1.22; font-weight: 600;
+      white-space: pre; letter-spacing: 0.04em; user-select: none; display: block;
+      animation: donut-hue 5s linear infinite;
     }
 
-    #donut {
-      font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
-      font-size: 0.82rem;
-      line-height: 1.22;
-      font-weight: 600;
-      white-space: pre;
-      letter-spacing: 0.04em;
-      user-select: none;
-      display: block;
-      animation: donut-hue 6s linear infinite;
+    .status-pill {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.22); border-radius: 50px;
+      padding: 0.18rem 0.7rem;
+      font-size: 0.65rem; font-weight: 700; color: #16a34a;
+      letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 1.1rem;
+      font-family: var(--mono);
+    }
+    .pulse { width: 5px; height: 5px; border-radius: 50%; background: #16a34a; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.15} }
+
+    h1 {
+      font-size: clamp(2.1rem, 3.8vw, 3.25rem);
+      font-weight: 900; letter-spacing: -0.045em; line-height: 1.08;
+      color: var(--text); margin-bottom: 1rem;
+    }
+    h1 .grad {
+      background: linear-gradient(100deg, #1d4ed8 10%, #2563eb 50%, #4f8ef7 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-desc {
+      font-size: 0.95rem; color: var(--mid); line-height: 1.85;
+      margin-bottom: 1.75rem; max-width: 460px;
+    }
+    .btn-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center;
+      background: var(--accent); color: #fff;
+      padding: 0.6rem 1.3rem; border-radius: 7px;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.01em;
+      transition: background 0.15s, transform 0.15s;
+      box-shadow: 0 1px 3px rgba(37,99,235,0.3), 0 4px 12px rgba(37,99,235,0.18);
+    }
+    .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); text-decoration: none; }
+    .btn-secondary {
+      display: inline-flex; align-items: center;
+      background: var(--surface); color: var(--mid);
+      padding: 0.6rem 1.3rem; border-radius: 7px;
+      font-size: 0.82rem; font-weight: 500; border: 1px solid var(--border2);
+      transition: color 0.15s, border-color 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .btn-secondary:hover { color: var(--text); border-color: rgba(0,0,0,0.22); box-shadow: 0 2px 8px rgba(0,0,0,0.09); text-decoration: none; }
+
+    /* SPONSORS STRIP */
+    .sponsors-strip {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0; text-align: center;
+    }
+    .sponsors-text {
+      font-family: var(--mono);
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted);
+      display: inline-flex; align-items: center; gap: 1.2rem;
+    }
+    .sponsors-text::before, .sponsors-text::after {
+      content: ''; display: inline-block; width: 48px; height: 1px; background: var(--border2);
+    }
+
+    /* FADE UP */
+    .fade-up { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* SECTIONS */
+    .section { padding: 3.5rem 0; }
+    .divider { border: none; border-top: 1px solid var(--border); }
+    .section-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.6rem; display: block;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2.1rem); font-weight: 800;
+      color: var(--text); letter-spacing: -0.03em; line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+
+    /* WHY JOIN */
+    .why-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 8px 32px rgba(0,0,0,0.05);
+    }
+    .why-card {
+      background: var(--surface); padding: 2.75rem 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .why-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(37,99,235,0.4), transparent);
+    }
+    .why-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1rem; display: block;
+    }
+    .why-card h3 {
+      font-size: 1.35rem; font-weight: 800; color: var(--text);
+      margin-bottom: 1rem; line-height: 1.2; letter-spacing: -0.03em;
+    }
+    .why-card p { font-size: 0.875rem; color: var(--mid); margin: 0; line-height: 1.82; }
+    @media(max-width: 700px) { .why-wrap { grid-template-columns: 1fr; } }
+
+    /* WHAT WE DO — TRACKS */
+    .track { padding: 2rem 0; border-top: 1px solid var(--border); }
+    .track:first-child { border-top: none; padding-top: 0; }
+    .track-header { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1.25rem; }
+    .track-num {
+      font-family: var(--mono); font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--muted); flex-shrink: 0;
+    }
+    .track-name {
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .track-qr   .track-name { color: #2563eb; }
+    .track-tse  .track-name { color: #ea580c; }
+    .track-strat .track-name { color: #16a34a; }
+    .track-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .track-card {
+      background: var(--surface); padding: 1.5rem 1.6rem;
+      transition: background 0.2s; position: relative;
+    }
+    .track-card:hover { background: var(--surface2); }
+    .track-qr   .track-card { border-left: 2px solid rgba(37,99,235,0.3); }
+    .track-tse  .track-card { border-left: 2px solid rgba(234,88,12,0.3); }
+    .track-strat .track-card { border-left: 2px solid rgba(22,163,74,0.3); }
+    .track-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--text); }
+    .track-card p { font-size: 0.8rem; color: var(--mid); margin: 0; line-height: 1.65; }
+
+    /* HOW IT WORKS */
+    .steps-list {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .step {
+      padding: 1.75rem 1.4rem; border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step[data-n="1"]::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #16a34a; }
+    .step[data-n="2"]::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #2563eb; }
+    .step[data-n="3"]::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #7c3aed; }
+    .step[data-n="4"]::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #ea580c; }
+    .step[data-n="5"]::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #0891b2; }
+    .step-num {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; display: block;
+    }
+    .step[data-n="1"] .step-num { color: #16a34a; }
+    .step[data-n="2"] .step-num { color: #2563eb; }
+    .step[data-n="3"] .step-num { color: #7c3aed; }
+    .step[data-n="4"] .step-num { color: #ea580c; }
+    .step[data-n="5"] .step-num { color: #0891b2; }
+    .step h3 { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.25; }
+    .step p { font-size: 0.78rem; color: var(--mid); margin: 0; line-height: 1.7; }
+    .step-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.65rem; font-weight: 600; padding: 0.18rem 0.55rem; border-radius: 4px;
+      font-family: var(--mono); letter-spacing: 0.04em;
+    }
+    .tag-green  { background: rgba(22,163,74,0.08); color: #16a34a; border: 1px solid rgba(22,163,74,0.2); }
+    .tag-blue   { background: rgba(37,99,235,0.07); color: #2563eb; border: 1px solid rgba(37,99,235,0.18); }
+    .tag-navy   { background: rgba(124,58,237,0.07); color: #7c3aed; border: 1px solid rgba(124,58,237,0.18); }
+    .tag-orange { background: rgba(234,88,12,0.07); color: #ea580c; border: 1px solid rgba(234,88,12,0.18); }
+    .tag-teal   { background: rgba(8,145,178,0.07); color: #0891b2; border: 1px solid rgba(8,145,178,0.18); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem; max-width: 1140px; margin: 0 auto;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
+      font-size: 0.7rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.05em;
     }
 
     @media(max-width: 900px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-visual { display: none; }
+      .track-grid { grid-template-columns: 1fr; }
+      .steps-list { grid-template-columns: repeat(2, 1fr); }
+      .step { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .step:nth-child(2n) { border-right: none; }
+      .step:last-child { border-bottom: none; }
     }
-
-    /* scroll fade-up */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+    @media(max-width: 580px) {
+      .steps-list { grid-template-columns: 1fr; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    .status-pill {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 50px;
-      padding: 0.22rem 0.8rem;
-      font-size: 0.7rem; font-weight: 600; color: #15803d;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      margin-bottom: 0.9rem;
-    }
-    .pulse { width: 5px; height: 5px; border-radius: 50%; background: #16a34a; animation: pulse 2.5s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.2} }
-
-    h1 {
-      font-size: clamp(1.5rem, 2.4vw, 2rem);
-      font-weight: 700; letter-spacing: -0.02em; line-height: 1.22;
-      color: var(--text); margin-bottom: 0.6rem;
-    }
-
-    .hero-desc {
-      font-size: 1rem; color: var(--mid); line-height: 1.75;
-      margin-bottom: 1.35rem; max-width: 560px;
-    }
-
-    .btn-row { display: flex; gap: 0.65rem; flex-wrap: wrap; }
-
-    .btn-primary {
-      display: inline-block; background: var(--navy); color: #fff;
-      padding: 0.55rem 1.25rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600;
-      transition: background 0.15s, transform 0.15s;
-    }
-    .btn-primary:hover { background: #243f72; transform: translateY(-1px); text-decoration: none; }
-
-    .btn-secondary {
-      display: inline-block; background: transparent; color: var(--mid);
-      padding: 0.55rem 1.25rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 500; border: 1px solid var(--border);
-      transition: border-color 0.15s, color 0.15s;
-    }
-    .btn-secondary:hover { border-color: #9ca3af; color: var(--text); text-decoration: none; }
-
-    /* SPONSORS STRIP */
-    .sponsors-strip {
-      background: #f3f4f6;
-      border-bottom: 1px solid var(--border);
-      padding: 0.65rem 0;
-      text-align: center;
-    }
-    .sponsors-text {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--light);
-    }
-
-    /* SHARED SECTION */
-    .section { padding: 2.5rem 0; }
-    .divider { border: none; border-top: 1px solid var(--border); }
-
-    h2 {
-      font-size: 0.95rem; font-weight: 600; color: var(--text);
-      margin-bottom: 1.1rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .snum { font-size: 0.68rem; font-weight: 600; color: var(--light); letter-spacing: 0.08em; }
-
-    /* WHAT WE DO */
-    .wwd-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-    .wwd-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .wwd-half-label {
-      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--navy);
-      margin-bottom: 0.75rem;
-    }
-
-    .wwd-card {
-      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
-      padding: 1.25rem; box-shadow: var(--card-shadow);
-      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-    }
-    .wwd-card:hover { box-shadow: var(--hover-shadow); transform: translateY(-2px); border-color: #c7d2e8; }
-
-    .wwd-icon {
-      width: 34px; height: 34px; background: #f0f4ff; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.95rem; margin-bottom: 0.8rem;
-    }
-    .wwd-card h3 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; }
-    .wwd-card p { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.6; }
-
-    /* WHAT WE DO HEADER */
-    .wwd-section-header {
-      background: var(--navy);
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 1.1rem 3rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-    .wwd-section-header h2 {
-      font-size: 1.5rem; font-weight: 800; color: #fff;
-      justify-content: center; margin-bottom: 0; letter-spacing: -0.02em;
-    }
-    .wwd-section-header .snum { color: rgba(255,255,255,0.35); }
-
-    /* HOW IT WORKS */
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 2px solid var(--border); border-radius: 16px; overflow: hidden; }
-
-    .step {
-      background: var(--white); padding: 1.75rem 1.5rem;
-      position: relative;
-    }
-
-    .step-num {
-      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--light);
-      margin-bottom: 0.7rem;
-    }
-
-    .step h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; line-height: 1.25; }
-    .step p { font-size: 0.83rem; color: var(--muted); margin: 0; line-height: 1.65; }
-
-    .step-arrow {
-      position: absolute; right: -1px; top: 50%;
-      transform: translateY(-50%);
-      width: 0; height: 0;
-      border-top: 10px solid transparent;
-      border-bottom: 10px solid transparent;
-      border-left: 10px solid var(--bg);
-      z-index: 1;
-    }
-
-    .step:last-child .step-arrow { display: none; }
-
-    .step-tag {
-      display: inline-block;
-      margin-top: 0.85rem;
-      font-size: 0.7rem; font-weight: 600;
-      padding: 0.2rem 0.65rem; border-radius: 50px;
-    }
-
-    .tag-green { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
-    .tag-blue  { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
-    .tag-navy  { background: #f0f4ff; color: var(--navy); border: 1px solid #c7d2fe; }
-
-    /* MEETINGS */
-    .meeting-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
-    .meeting-card {
-      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
-      padding: 1.35rem 1.5rem; box-shadow: var(--card-shadow);
-      display: flex; align-items: flex-start; gap: 1rem;
-      transition: box-shadow 0.2s, border-color 0.2s;
-    }
-    .meeting-card:hover { box-shadow: var(--hover-shadow); border-color: #c7d2e8; }
-
-    .meeting-icon {
-      width: 38px; height: 38px; border-radius: 10px; background: #f0f4ff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem; flex-shrink: 0;
-    }
-    .meeting-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
-    .meeting-detail { font-size: 0.8rem; color: var(--muted); }
-
-    .tbd-note {
-      font-size: 0.72rem; color: var(--light); font-style: italic; margin-top: 0.25rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1.75rem 3rem;
-      max-width: 1140px; margin: 3rem auto 0;
-      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
-      font-size: 0.75rem; color: var(--light);
-    }
-
-    @media(max-width: 900px) { .wwd-grid { grid-template-columns: 1fr 1fr; } .wwd-grid-2 { grid-template-columns: 1fr 1fr; } .steps { grid-template-columns: 1fr; } }
     @media(max-width: 600px) {
       .wide { padding: 0 1.25rem; } nav { padding: 0 1.25rem; }
-      .wwd-grid { grid-template-columns: 1fr; } .meeting-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -369,77 +336,77 @@
   <svg class="hero-chart" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
 
     <!-- grid -->
-    <line x1="0" y1="64"  x2="1200" y2="64"  stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
-    <line x1="0" y1="128" x2="1200" y2="128" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
-    <line x1="0" y1="192" x2="1200" y2="192" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
-    <line x1="0" y1="256" x2="1200" y2="256" stroke="#1a2d4f" stroke-width="0.5" opacity="0.09"/>
-    <line x1="200"  y1="0" x2="200"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
-    <line x1="400"  y1="0" x2="400"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
-    <line x1="600"  y1="0" x2="600"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
-    <line x1="800"  y1="0" x2="800"  y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
-    <line x1="1000" y1="0" x2="1000" y2="320" stroke="#1a2d4f" stroke-width="0.5" opacity="0.07"/>
+    <line x1="0" y1="64"  x2="1200" y2="64"  stroke="#0a0e1a" stroke-width="0.5" opacity="0.06"/>
+    <line x1="0" y1="128" x2="1200" y2="128" stroke="#0a0e1a" stroke-width="0.5" opacity="0.06"/>
+    <line x1="0" y1="192" x2="1200" y2="192" stroke="#0a0e1a" stroke-width="0.5" opacity="0.06"/>
+    <line x1="0" y1="256" x2="1200" y2="256" stroke="#0a0e1a" stroke-width="0.5" opacity="0.06"/>
+    <line x1="200"  y1="0" x2="200"  y2="320" stroke="#0a0e1a" stroke-width="0.5" opacity="0.04"/>
+    <line x1="400"  y1="0" x2="400"  y2="320" stroke="#0a0e1a" stroke-width="0.5" opacity="0.04"/>
+    <line x1="600"  y1="0" x2="600"  y2="320" stroke="#0a0e1a" stroke-width="0.5" opacity="0.04"/>
+    <line x1="800"  y1="0" x2="800"  y2="320" stroke="#0a0e1a" stroke-width="0.5" opacity="0.04"/>
+    <line x1="1000" y1="0" x2="1000" y2="320" stroke="#0a0e1a" stroke-width="0.5" opacity="0.04"/>
 
     <!-- 16 brownian paths, all from (0,160), points every 30px for jagged look -->
     <g fill="none" stroke-linecap="round" stroke-linejoin="round">
 
       <!-- very strong up, ends ~8 — green -->
-      <polyline stroke="#22a85c" stroke-width="1.1" opacity="0.16"
+      <polyline stroke="#16a34a" stroke-width="1.4" opacity="0.35"
         points="0,160 30,153 60,158 90,148 120,143 150,150 180,140 210,132 240,138 270,128 300,122 330,130 360,120 390,114 420,108 450,115 480,105 510,98 540,105 570,95 600,88 630,94 660,84 690,78 720,85 750,75 780,68 810,74 840,64 870,58 900,65 930,55 960,48 990,55 1020,45 1050,38 1080,44 1110,35 1140,28 1170,18 1200,8"/>
 
       <!-- strong up, ends ~22 — green -->
-      <polyline stroke="#22a85c" stroke-width="1" opacity="0.14"
+      <polyline stroke="#16a34a" stroke-width="1.1" opacity="0.28"
         points="0,160 30,156 60,162 90,152 120,148 150,155 180,145 210,138 240,144 270,134 300,128 330,135 360,126 390,120 420,115 450,122 480,112 510,106 540,112 570,102 600,96 630,103 660,93 690,88 720,95 750,85 780,78 810,85 840,75 870,70 900,76 930,66 960,60 990,67 1020,57 1050,52 1080,58 1110,48 1140,42 1170,32 1200,22"/>
 
       <!-- moderate up, ends ~42 — green -->
-      <polyline stroke="#22a85c" stroke-width="1" opacity="0.13"
+      <polyline stroke="#16a34a" stroke-width="1" opacity="0.22"
         points="0,160 30,158 60,164 90,155 120,152 150,158 180,149 210,144 240,150 270,140 300,135 330,142 360,133 390,128 420,124 450,130 480,122 510,116 540,122 570,113 600,108 630,115 660,106 690,101 720,108 750,98 780,93 810,100 840,91 870,86 900,92 930,82 960,77 990,84 1020,75 1050,70 1080,76 1110,67 1140,62 1170,52 1200,42"/>
 
       <!-- moderate up, ends ~62 — green -->
-      <polyline stroke="#22a85c" stroke-width="1" opacity="0.12"
+      <polyline stroke="#16a34a" stroke-width="1" opacity="0.18"
         points="0,160 30,157 60,163 90,156 120,153 150,160 180,153 210,148 240,155 270,147 300,141 330,149 360,141 390,136 420,132 450,139 480,132 510,126 540,132 570,124 600,118 630,125 660,117 690,112 720,119 750,111 780,106 810,113 840,105 870,100 900,106 930,98 960,93 990,100 1020,93 1050,88 1080,94 1110,87 1140,80 1170,72 1200,62"/>
 
       <!-- slight up, ends ~92 — green -->
-      <polyline stroke="#22a85c" stroke-width="1" opacity="0.12"
+      <polyline stroke="#16a34a" stroke-width="1" opacity="0.14"
         points="0,160 30,158 60,165 90,158 120,156 150,162 180,156 210,151 240,157 270,151 300,146 330,152 360,146 390,141 420,138 450,144 480,138 510,133 540,139 570,132 600,127 630,133 660,127 690,122 720,129 750,122 780,117 810,124 840,118 870,113 900,119 930,113 960,108 990,115 1020,109 1050,104 1080,110 1110,104 1140,98 1170,95 1200,92"/>
 
       <!-- slight up, ends ~115 — green -->
-      <polyline stroke="#22a85c" stroke-width="1" opacity="0.11"
+      <polyline stroke="#16a34a" stroke-width="1" opacity="0.11"
         points="0,160 30,159 60,165 90,159 120,157 150,163 180,158 210,153 240,159 270,154 300,149 330,155 360,150 390,145 420,143 450,149 480,144 510,139 540,145 570,139 600,134 630,140 660,135 690,130 720,136 750,130 780,126 810,132 840,127 870,122 900,128 930,123 960,119 990,125 1020,120 1050,115 1080,121 1110,116 1140,112 1170,114 1200,115"/>
 
-      <!-- barely up / flat, ends ~132 — neutral navy -->
-      <polyline stroke="#1a2d4f" stroke-width="1" opacity="0.10"
+      <!-- barely up / flat, ends ~132 — neutral white -->
+      <polyline stroke="#1e293b" stroke-width="1" opacity="0.09"
         points="0,160 30,160 60,166 90,160 120,159 150,165 180,160 210,155 240,161 270,156 300,152 330,158 360,154 390,149 420,147 450,153 480,149 510,144 540,150 570,145 600,141 630,147 660,143 690,138 720,144 750,139 780,135 810,141 840,137 870,132 900,138 930,134 960,130 990,136 1020,132 1050,128 1080,134 1110,130 1140,127 1170,130 1200,132"/>
 
-      <!-- flat, ends ~158 — neutral navy -->
-      <polyline stroke="#1a2d4f" stroke-width="1" opacity="0.09"
+      <!-- flat, ends ~158 — neutral white -->
+      <polyline stroke="#1e293b" stroke-width="1" opacity="0.07"
         points="0,160 30,162 60,168 90,162 120,161 150,167 180,162 210,158 240,163 270,159 300,155 330,161 360,157 390,153 420,151 450,157 480,153 510,149 540,155 570,151 600,147 630,153 660,149 690,145 720,151 750,147 780,143 810,149 840,145 870,141 900,147 930,143 960,140 990,146 1020,143 1050,139 1080,145 1110,141 1140,139 1170,148 1200,158"/>
 
       <!-- slight down, ends ~178 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.10"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.18"
         points="0,160 30,162 60,157 90,163 120,161 150,156 180,162 210,158 240,162 270,158 300,163 330,158 360,164 390,160 420,165 450,160 480,166 510,161 540,166 570,162 600,167 630,163 660,168 690,164 720,170 750,165 780,170 810,166 840,172 870,168 900,174 930,170 960,175 990,170 1020,175 1050,171 1080,176 1110,172 1140,177 1170,174 1200,178"/>
 
       <!-- slight down, ends ~198 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.11"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.22"
         points="0,160 30,163 60,158 90,165 120,163 150,169 180,163 210,170 240,165 270,171 300,166 330,173 360,168 390,174 420,170 450,176 480,171 510,178 540,173 570,179 600,175 630,181 660,176 690,182 720,178 750,184 780,180 810,186 840,182 870,188 900,184 930,190 960,186 990,192 1020,188 1050,194 1080,190 1110,196 1140,192 1170,196 1200,198"/>
 
       <!-- moderate down, ends ~228 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.26"
         points="0,160 30,165 60,172 90,166 120,174 150,180 180,174 210,181 240,176 270,183 300,178 330,185 360,180 390,187 420,183 450,190 480,185 510,192 540,188 570,195 600,190 630,197 660,193 690,200 720,196 750,203 780,199 810,206 840,202 870,208 900,205 930,212 960,208 990,214 1020,210 1050,217 1080,214 1110,220 1140,216 1170,222 1200,228"/>
 
       <!-- moderate down, ends ~252 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.11"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.22"
         points="0,160 30,166 60,174 90,167 120,176 150,183 180,177 210,185 240,180 270,188 300,183 330,191 360,186 390,194 420,190 450,198 480,193 510,201 540,197 570,205 600,200 630,208 660,204 690,212 720,208 750,216 780,212 810,220 840,216 870,224 900,220 930,228 960,224 990,232 1020,228 1050,236 1080,232 1110,240 1140,237 1170,244 1200,252"/>
 
       <!-- strong down, ends ~275 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.26"
         points="0,160 30,167 60,176 90,169 120,179 150,187 180,181 210,190 240,185 270,194 300,190 330,199 360,194 390,203 420,199 450,208 480,204 510,213 540,209 570,218 600,214 630,223 660,219 690,228 720,225 750,234 780,230 810,239 840,236 870,245 900,241 930,250 960,247 990,256 1020,252 1050,261 1080,258 1110,267 1140,264 1170,271 1200,275"/>
 
       <!-- strong down, ends ~295 — red -->
-      <polyline stroke="#d44040" stroke-width="1" opacity="0.12"
+      <polyline stroke="#dc2626" stroke-width="1" opacity="0.26"
         points="0,160 30,168 60,178 90,171 120,181 150,190 180,184 210,194 240,189 270,199 300,195 330,205 360,200 390,210 420,206 450,216 480,212 510,222 540,218 570,228 600,224 630,234 660,230 690,240 720,237 750,247 780,243 810,253 840,250 870,260 900,257 930,267 960,264 990,274 1020,270 1050,280 1080,277 1110,287 1140,284 1170,291 1200,295"/>
 
       <!-- very strong down, ends ~312 — red -->
-      <polyline stroke="#d44040" stroke-width="1.1" opacity="0.14"
+      <polyline stroke="#dc2626" stroke-width="1.4" opacity="0.35"
         points="0,160 30,170 60,182 90,174 120,185 150,195 180,188 210,199 240,194 270,205 300,201 330,212 360,207 390,218 420,214 450,225 480,221 510,232 540,228 570,239 600,235 630,246 660,242 690,253 720,250 750,261 780,257 810,268 840,265 870,276 900,272 930,283 960,280 990,291 1020,287 1050,298 1080,295 1110,306 1140,302 1170,308 1200,312"/>
     </g>
   </svg>
@@ -452,7 +419,7 @@
           <span class="pulse"></span>
           Now Forming &mdash; Fall 2026
         </div>
-        <h1>UCI's premier algorithmic trading club.</h1>
+        <h1>UCI's premier <span class="grad">algorithmic trading</span> club.</h1>
         <p class="hero-desc">
           Members write code, develop systematic trading strategies, and run them against a shared paper portfolio — learning quantitative finance by actually doing it. No prior experience needed.
         </p>
@@ -479,86 +446,101 @@
 
 <div class="wide">
 
+  <!-- WHY JOIN -->
+  <div class="section" style="padding-bottom: 0;">
+    <div class="why-wrap">
+      <div class="why-card fade-up" style="transition-delay:0s">
+        <span class="why-tag">Why this club</span>
+        <h3>The same systems top quant firms build — built by us.</h3>
+        <p>Order management systems, low-latency data pipelines, signal research infrastructure — the architecture we're building mirrors what Two Sigma, Citadel, and Jane Street run in production. We use Rust because microseconds matter and correctness is non-negotiable. If it's sloppy, it doesn't ship.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:0.1s">
+        <span class="why-tag">Ownership</span>
+        <h3>Real ownership. Genuinely hard problems.</h3>
+        <p>Members aren't assigned tasks — they take full ownership of real systems. Your strategy, your code, your results tracked against a shared portfolio. This is production-grade engineering at the systems level: performance matters, the bar is high, and the work will push you further than any class will.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" style="margin-top: 2.5rem;">
+
   <!-- WHAT WE DO -->
   <div class="section">
-    <div class="wwd-section-header">
-      <h2><span class="snum">01</span> What we do</h2>
-    </div>
+    <span class="section-eyebrow">What we do</span>
+    <h2>Tracks. One integrated system.</h2>
 
-    <div class="wwd-half">
-      <div class="wwd-half-label">Quantitative Research</div>
-      <div class="wwd-grid-2">
-        <div class="wwd-card fade-up" style="transition-delay:0s">
-          <div class="wwd-icon">&#128202;</div>
+    <div class="track track-qr">
+      <div class="track-header">
+        <span class="track-num">01</span>
+        <span class="track-name">Quantitative Research</span>
+      </div>
+      <div class="track-grid">
+        <div class="track-card fade-up" style="transition-delay:0s">
           <h3>Statistical Signal Research</h3>
           <p>Find and test quantitative signals in market data. Members develop alpha from scratch — momentum, mean-reversion, cross-sectional factors — and validate them rigorously before anything goes live.</p>
         </div>
-        <div class="wwd-card fade-up" style="transition-delay:0.08s">
-          <div class="wwd-icon">&#128200;</div>
+        <div class="track-card fade-up" style="transition-delay:0.08s">
           <h3>Backtesting &amp; Paper Trading</h3>
           <p>Every strategy runs through a structured backtest and then paper trades against the club's shared portfolio. Results are tracked and reviewed openly week over week.</p>
         </div>
       </div>
     </div>
 
-    <div class="wwd-half" style="margin-top: 1.5rem;">
-      <div class="wwd-half-label">Trading Systems Engineering</div>
-      <div class="wwd-grid-2">
-        <div class="wwd-card fade-up" style="transition-delay:0.12s">
-          <div class="wwd-icon">&#9881;&#65039;</div>
+    <div class="track track-tse">
+      <div class="track-header">
+        <span class="track-num">02</span>
+        <span class="track-name">Trading Systems Engineering</span>
+      </div>
+      <div class="track-grid">
+        <div class="track-card fade-up" style="transition-delay:0.12s">
           <h3>Trading Systems in Rust</h3>
           <p>Build low-latency execution and data infrastructure in Rust. Order routing, position management, and real-time market data handling — engineered for performance and reliability.</p>
         </div>
-        <div class="wwd-card fade-up" style="transition-delay:0.2s">
-          <div class="wwd-icon">&#128640;</div>
-          <h3>Scalable Data Pipelines</h3>
-          <p>Design and maintain the systems that power the club's research — ingestion, normalization, and storage of price and alternative data at scale. The plumbing every quant fund depends on.</p>
+        <div class="track-card fade-up" style="transition-delay:0.2s">
+          <h3>Data Engineering</h3>
+          <p>Build and maintain the data infrastructure that powers all research — ingesting large datasets of price, volume, and alternative data, normalizing across sources, and storing at scale for fast querying. The foundation every quant fund runs on.</p>
         </div>
       </div>
     </div>
 
-    <div class="wwd-half" style="margin-top: 1.5rem;">
-      <div class="wwd-half-label">Education</div>
-      <div class="wwd-grid-2">
-        <div class="wwd-card fade-up" style="transition-delay:0.24s">
-          <div class="wwd-icon">&#128218;</div>
-          <h3>Structured Curriculum</h3>
-          <p>A progressive learning track covering probability, statistics, time-series analysis, and portfolio theory — with hands-on coding exercises tied directly to what members are building in the club.</p>
-        </div>
-        <div class="wwd-card fade-up" style="transition-delay:0.32s">
-          <div class="wwd-icon">&#128172;</div>
-          <h3>Research Seminars</h3>
-          <p>Weekly sessions breaking down academic papers, industry strategies, and real market events. Members present their own work and get direct feedback from the group.</p>
-        </div>
-      </div>
-    </div>
   </div>
 
   <hr class="divider">
 
   <!-- HOW IT WORKS -->
   <div class="section">
-    <h2><span class="snum">02</span> How it works</h2>
-    <div class="steps fade-up">
-      <div class="step">
-        <div class="step-num">Phase 1</div>
-        <h3>Learn &amp; Build</h3>
-        <p>Pick a strategy idea, research the signal, and implement it in Python. We provide the infrastructure — data feeds, a backtesting framework, and weekly sessions to help you get started.</p>
-        <span class="step-tag tag-green">Hands-on from day one</span>
-        <div class="step-arrow"></div>
+    <span class="section-eyebrow">How it works</span>
+    <h2>From idea to execution.</h2>
+    <div class="steps-list">
+      <div class="step" data-n="1">
+        <span class="step-num">Step 1</span>
+        <h3>Pick a Track</h3>
+        <p>Choose Quantitative Research or Trading Systems Engineering based on what interests you. No prior experience required — just pick a direction and dive in.</p>
+        <span class="step-tag tag-green">Start anywhere</span>
       </div>
-      <div class="step">
-        <div class="step-num">Phase 2</div>
-        <h3>Paper Trade Club Capital</h3>
-        <p>Once your backtest holds up, your strategy goes live against the club's shared paper portfolio. Performance is tracked, compared, and reviewed openly by the group every week.</p>
-        <span class="step-tag tag-blue">Real execution, zero risk</span>
-        <div class="step-arrow"></div>
+      <div class="step" data-n="2">
+        <span class="step-num">Step 2</span>
+        <h3>Pick a Project</h3>
+        <p>Browse open projects within your track or pitch your own. Every member works on something concrete from week one — no busywork, no passive learning.</p>
+        <span class="step-tag tag-blue">Hands-on from day one</span>
       </div>
-      <div class="step">
-        <div class="step-num">Phase 3</div>
+      <div class="step" data-n="3">
+        <span class="step-num">Step 3</span>
+        <h3>Collaborate</h3>
+        <p>Work with other members on strategy ideas, architecture decisions, and code reviews. The best work happens at the intersection of quant research and systems engineering.</p>
+        <span class="step-tag tag-navy">Better together</span>
+      </div>
+      <div class="step" data-n="4">
+        <span class="step-num">Step 4</span>
+        <h3>Publish Your Work</h3>
+        <p>Write up what you built on the club blog. Document your methodology, results, and code. Strong work gets noticed — by peers, recruiters, and the broader quant community.</p>
+        <span class="step-tag tag-orange">Build your portfolio</span>
+      </div>
+      <div class="step" data-n="5">
+        <span class="step-num">Step 5</span>
         <h3>Deploy on Your Own</h3>
-        <p>Strategies that prove out over time can be deployed on your own brokerage account. The long-term goal is a pooled student fund — managed entirely by club members.</p>
-        <span class="step-tag tag-navy">Real capital, real returns</span>
+        <p>Want to trade with real money? Use the club's tested signals and models on your own brokerage account. The risk is yours — so is the upside.</p>
+        <span class="step-tag tag-teal">Real capital, real returns</span>
       </div>
     </div>
   </div>
