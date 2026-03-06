@@ -139,6 +139,17 @@
       padding: 0.12rem 0.55rem; border-radius: 4px;
     }
 
+    /* PEOPLE GRID */
+    .people-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .person-card {
+      background: var(--white); border: 2px solid var(--border); border-radius: 16px;
+      padding: 1.4rem 1.5rem; box-shadow: var(--card-shadow);
+      display: flex; gap: 1rem; align-items: flex-start;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .person-card:hover { box-shadow: var(--hover-shadow); border-color: #c7d2e8; }
+    @media(max-width: 700px) { .people-grid { grid-template-columns: 1fr; } }
+
     /* JOIN */
     .join-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 
@@ -217,48 +228,62 @@
 
   <hr class="divider">
 
-  <h2><span class="snum">01</span> Tracks</h2>
-  <div class="track-grid">
-    <div class="track-card">
-      <div class="track-icon">&#128202;</div>
-      <h3>Research</h3>
-      <p>Develop and backtest trading strategies. Write up your process and present results to the group for peer review.</p>
+  <h2><span class="snum">01</span> People</h2>
+  <div class="people-grid">
+    <div class="person-card">
+      <div class="avatar">JD</div>
+      <div>
+        <div class="founder-name">John Doe</div>
+        <div class="founder-role">Founder &amp; President</div>
+        <div class="chip-row">
+          <span class="chip">ML/AI</span>
+          <span class="chip">Python</span>
+          <span class="chip">Rust</span>
+          <span class="chip">UCI Engineering</span>
+        </div>
+      </div>
     </div>
-    <div class="track-card">
-      <div class="track-icon">&#128187;</div>
-      <h3>Engineering</h3>
-      <p>Build the club's infrastructure — backtesting engines, data pipelines, paper trading integrations, and dashboards.</p>
+    <div class="person-card">
+      <div class="avatar" style="background:#dbeafe; color:#1e40af;">JD</div>
+      <div>
+        <div class="founder-name">John Doe</div>
+        <div class="founder-role">Quant Research Lead</div>
+        <div class="chip-row">
+          <span class="chip">Statistics</span>
+          <span class="chip">Factor Models</span>
+          <span class="chip">UCI Math</span>
+        </div>
+      </div>
     </div>
-    <div class="track-card">
-      <div class="track-icon">&#127979;</div>
-      <h3>Education</h3>
-      <p>Run weekly sessions and create learning resources for members who are newer to quantitative finance.</p>
+    <div class="person-card">
+      <div class="avatar" style="background:#fce7f3; color:#9d174d;">JD</div>
+      <div>
+        <div class="founder-name">John Doe</div>
+        <div class="founder-role">Systems Engineering Lead</div>
+        <div class="chip-row">
+          <span class="chip">Rust</span>
+          <span class="chip">C++</span>
+          <span class="chip">UCI CS</span>
+        </div>
+      </div>
     </div>
-  </div>
-
-  <hr class="divider">
-
-  <h2><span class="snum">02</span> Founder</h2>
-  <div class="founder-card">
-    <div class="avatar">JD</div>
-    <div>
-      <div class="founder-name">John Doe</div>
-      <div class="founder-role">Founder &amp; President</div>
-      <p class="founder-bio">
-        Computer Engineering student and ML researcher. 
-      </p>
-      <div class="chip-row">
-        <span class="chip">ML/AI</span>
-        <span class="chip">Python</span>
-        <span class="chip">Rust</span>
-		<span class="chip">UCI Engineering</span>
+    <div class="person-card">
+      <div class="avatar" style="background:#ecfdf5; color:#065f46;">JD</div>
+      <div>
+        <div class="founder-name">John Doe</div>
+        <div class="founder-role">Education Lead</div>
+        <div class="chip-row">
+          <span class="chip">Econometrics</span>
+          <span class="chip">Python</span>
+          <span class="chip">UCI Econ</span>
+        </div>
       </div>
     </div>
   </div>
 
   <hr class="divider">
 
-  <h2 id="join"><span class="snum">03</span> Get Involved</h2>
+  <h2 id="join"><span class="snum">02</span> Get Involved</h2>
   <p style="margin-bottom: 1.5rem;">The club is just getting started. Come to a meeting or reach out — all skill levels welcome.</p>
 
   <div class="join-grid">
