@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Projects &mdash; Anteater Capital</title>
+  <title>Projects &mdash; Irvine Quantitative Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -11,71 +11,83 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #fafaf8;
-      --white: #ffffff;
-      --navy: #1a2d4f;
-      --blue: #2a52be;
-      --text: #111827;
-      --mid: #374151;
-      --muted: #6b7280;
-      --light: #9ca3af;
-      --border: #e5e7eb;
-      --card-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --surface2: #eef0f7;
+      --border: rgba(0,0,0,0.08);
+      --border2: rgba(0,0,0,0.14);
+      --accent: #2563eb;
+      --text: #0a0e1a;
+      --mid: rgba(10,14,26,0.62);
+      --muted: rgba(10,14,26,0.42);
+      --mono: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
     }
 
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
-    a { color: var(--blue); text-decoration: none; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(37,99,235,0.055) 1px, transparent 0);
+      background-size: 32px 32px;
+    }
+    nav, .page-header, .content, footer { position: relative; z-index: 1; }
+    a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
     nav {
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(245,246,250,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0 3rem;
       display: flex; align-items: center; justify-content: space-between;
-      height: 54px;
+      height: 52px;
       position: sticky; top: 0; z-index: 50;
     }
 
     .nav-brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
     .nav-mark {
-      width: 26px; height: 26px; background: var(--navy); border-radius: 6px;
+      width: 24px; height: 24px; background: var(--accent); border-radius: 5px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; font-weight: 700; color: #fff; flex-shrink: 0;
+      font-size: 0.58rem; font-weight: 800; color: #fff; flex-shrink: 0; letter-spacing: 0.05em;
     }
-    .nav-logo-img { height: 26px; width: 26px; object-fit: contain; display: block; }
-    .nav-name { font-size: 0.9rem; font-weight: 600; color: var(--text); }
-    nav ul { list-style: none; display: flex; gap: 0.2rem; }
+    .nav-logo-img { height: 24px; width: 24px; object-fit: contain; display: block; opacity: 0.85; mix-blend-mode: multiply; }
+    .nav-name { font-size: 0.87rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+    nav ul { list-style: none; display: flex; gap: 0.1rem; }
     nav ul a {
-      font-size: 0.83rem; font-weight: 500; color: var(--muted);
-      padding: 0.3rem 0.7rem; border-radius: 6px;
+      font-size: 0.78rem; font-weight: 500; color: var(--muted);
+      padding: 0.28rem 0.65rem; border-radius: 6px;
       transition: color 0.15s, background 0.15s;
     }
-    nav ul a:hover { color: var(--text); background: #f3f4f6; text-decoration: none; }
-    nav ul a.active { color: var(--text); background: #f3f4f6; }
+    nav ul a:hover { color: var(--text); background: rgba(0,0,0,0.05); text-decoration: none; }
+    nav ul a.active { color: var(--text); background: rgba(0,0,0,0.05); }
 
     .page-header {
-      background: var(--white);
+      background: linear-gradient(155deg, #ffffff 0%, #eef3ff 60%, #f0f5ff 100%);
       border-bottom: 1px solid var(--border);
-      padding: 2.5rem 0 2rem;
+      padding: 2.75rem 0 2.25rem;
     }
     .inner { max-width: 1140px; margin: 0 auto; padding: 0 3rem; }
 
     .eyebrow {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.55rem; display: block;
     }
-    .page-header h1 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.4rem; }
-    .page-header p { color: var(--muted); font-size: 0.92rem; }
+    .page-header h1 {
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800;
+      letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 0.5rem; color: var(--text);
+    }
+    .page-header p { color: var(--mid); font-size: 0.9rem; }
 
     .content { max-width: 1140px; margin: 0 auto; padding: 3rem 3rem 5rem; }
 
     /* COMING SOON */
     .coming-soon {
-      background: var(--white);
-      border: 2px solid var(--border);
+      background: var(--surface);
+      border: 1px solid var(--border2);
       border-radius: 16px;
       padding: 4rem 2rem;
       text-align: center;
@@ -92,7 +104,7 @@
     }
 
     .coming-soon p {
-      font-size: 0.9rem; color: var(--muted); max-width: 440px;
+      font-size: 0.9rem; color: var(--mid); max-width: 440px;
       margin: 0 auto 1.75rem; line-height: 1.75;
     }
 
@@ -103,40 +115,43 @@
     }
 
     .upcoming-card {
-      background: var(--white); border: 2px solid var(--border); border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--border2); border-radius: 14px;
       padding: 1.4rem; box-shadow: var(--card-shadow);
+      transition: box-shadow 0.2s, transform 0.2s;
     }
+    .upcoming-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); transform: translateY(-2px); }
 
     .upcoming-tag {
-      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em;
-      text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem;
       display: block;
     }
 
-    .upcoming-card h3 { font-size: 0.875rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; line-height: 1.4; }
-    .upcoming-card p { font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.6; }
+    .upcoming-card h3 { font-size: 0.875rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem; line-height: 1.4; }
+    .upcoming-card p { font-size: 0.8rem; color: var(--mid); margin: 0; line-height: 1.6; }
 
     .status-badge {
       display: inline-block; margin-top: 0.85rem;
-      font-size: 0.68rem; font-weight: 600;
-      background: #fafafa; border: 1px solid var(--border);
-      color: var(--light); padding: 0.18rem 0.6rem; border-radius: 50px;
+      font-size: 0.65rem; font-weight: 600; font-family: var(--mono);
+      background: var(--surface2); border: 1px solid var(--border2);
+      color: var(--muted); padding: 0.18rem 0.6rem; border-radius: 50px;
     }
 
     h2 {
-      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      font-size: 0.9rem; font-weight: 700; color: var(--text);
       margin-bottom: 1rem;
       display: flex; align-items: center; gap: 0.5rem;
     }
 
-    .snum { font-size: 0.68rem; font-weight: 600; color: var(--light); letter-spacing: 0.08em; }
+    .snum { font-family: var(--mono); font-size: 0.6rem; font-weight: 700; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; }
 
     footer {
       border-top: 1px solid var(--border);
-      padding: 1.75rem 3rem;
+      padding: 1.5rem 3rem;
       max-width: 1140px; margin: 0 auto;
       display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;
-      font-size: 0.75rem; color: var(--light);
+      font-size: 0.7rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.05em;
     }
 
     @media(max-width: 900px) { .upcoming-grid { grid-template-columns: 1fr 1fr; } }
@@ -154,7 +169,7 @@
     <img class="nav-logo-img" src="images/uci-logo.png" alt="UCI"
          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
     <div class="nav-mark" style="display:none">AC</div>
-    <span class="nav-name">Anteater Capital</span>
+    <span class="nav-name">Irvine Quantitative Management</span>
   </a>
   <ul>
     <li><a href="index.html">Home</a></li>
@@ -179,7 +194,7 @@
     <p>
       We're in the early stages of forming the club and building out our first research tracks. Projects will be posted here as strategies are developed, backtested, and reviewed.
     </p>
-    <a href="about.html#join" style="display:inline-block; background:var(--navy); color:#fff; padding:0.55rem 1.3rem; border-radius:8px; font-size:0.85rem; font-weight:600; text-decoration:none;">
+    <a href="about.html#join" style="display:inline-block; background:var(--accent); color:#fff; padding:0.55rem 1.3rem; border-radius:8px; font-size:0.85rem; font-weight:700; text-decoration:none; box-shadow:0 1px 3px rgba(37,99,235,0.3),0 4px 12px rgba(37,99,235,0.18);">
       Get involved early &rarr;
     </a>
   </div>
@@ -214,7 +229,7 @@
   <span style="display:flex; align-items:center; gap:0.6rem;">
     <img src="images/uci-logo.png" alt="UCI" style="height:20px; opacity:0.45; filter:grayscale(1);"
          onerror="this.style.display='none'">
-    Anteater Capital &middot; UC Irvine
+    Irvine Quantitative Management &middot; UC Irvine
   </span>
   <span>Student organization &middot; Not affiliated with UCI Financial Services</span>
 </footer>
