@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Irvine Quantitative Management</title>
+  <title>UCI Quantitative Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -143,7 +143,7 @@
       padding: 3rem 0 2.5rem;
     }
 
-    /* Moving grid lines */
+    /* Grid lines */
     .hero-wrap::before {
       content: '';
       position: absolute; inset: 0; pointer-events: none;
@@ -151,11 +151,6 @@
         linear-gradient(rgba(96,165,250,0.07) 1px, transparent 1px),
         linear-gradient(90deg, rgba(96,165,250,0.07) 1px, transparent 1px);
       background-size: 80px 80px;
-      animation: grid-scroll 18s linear infinite;
-    }
-    @keyframes grid-scroll {
-      0%   { background-position: 0 0; }
-      100% { background-position: 80px 80px; }
     }
 
     .hero-chart {
@@ -521,16 +516,16 @@
 
 <!-- ANNOUNCE BAR -->
 <div class="announce-bar">
-  <span class="pulse"></span>Now Forming &mdash; Fall 2026
+  <span class="pulse"></span>Now Forming &mdash; Spring 2026
 </div>
 
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img class="nav-logo-img" src="images/logo.png" alt="IQM"
+    <img class="nav-logo-img" src="images/logo.png" alt="AC"
          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-    <div class="nav-mark" style="display:none">IQ</div>
-    <span class="nav-name">Irvine Quantitative Management</span>
+    <div class="nav-mark" style="display:none">AC</div>
+    <span class="nav-name">UCI Quantitative Management</span>
   </a>
   <ul>
     <li><a href="index.html" class="active">Home</a></li>
@@ -542,59 +537,15 @@
 <!-- HERO -->
 <div class="hero-wrap">
 
-  <!-- Brownian motion fan -->
-  <svg class="hero-chart" viewBox="0 0 1200 320" preserveAspectRatio="none" aria-hidden="true">
-    <!-- grid lines -->
-    <line x1="0" y1="64"  x2="1200" y2="64"  stroke="#60a5fa" stroke-width="0.5" opacity="0.07"/>
-    <line x1="0" y1="128" x2="1200" y2="128" stroke="#60a5fa" stroke-width="0.5" opacity="0.07"/>
-    <line x1="0" y1="192" x2="1200" y2="192" stroke="#60a5fa" stroke-width="0.5" opacity="0.07"/>
-    <line x1="0" y1="256" x2="1200" y2="256" stroke="#60a5fa" stroke-width="0.5" opacity="0.07"/>
-    <line x1="200"  y1="0" x2="200"  y2="320" stroke="#60a5fa" stroke-width="0.5" opacity="0.05"/>
-    <line x1="400"  y1="0" x2="400"  y2="320" stroke="#60a5fa" stroke-width="0.5" opacity="0.05"/>
-    <line x1="600"  y1="0" x2="600"  y2="320" stroke="#60a5fa" stroke-width="0.5" opacity="0.05"/>
-    <line x1="800"  y1="0" x2="800"  y2="320" stroke="#60a5fa" stroke-width="0.5" opacity="0.05"/>
-    <line x1="1000" y1="0" x2="1000" y2="320" stroke="#60a5fa" stroke-width="0.5" opacity="0.05"/>
-    <!-- paths -->
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <polyline stroke="#34d399" stroke-width="1.6" opacity="0.55"
-        points="0,160 30,153 60,158 90,148 120,143 150,150 180,140 210,132 240,138 270,128 300,122 330,130 360,120 390,114 420,108 450,115 480,105 510,98 540,105 570,95 600,88 630,94 660,84 690,78 720,85 750,75 780,68 810,74 840,64 870,58 900,65 930,55 960,48 990,55 1020,45 1050,38 1080,44 1110,35 1140,28 1170,18 1200,8"/>
-      <polyline stroke="#34d399" stroke-width="1.2" opacity="0.38"
-        points="0,160 30,156 60,162 90,152 120,148 150,155 180,145 210,138 240,144 270,134 300,128 330,135 360,126 390,120 420,115 450,122 480,112 510,106 540,112 570,102 600,96 630,103 660,93 690,88 720,95 750,85 780,78 810,85 840,75 870,70 900,76 930,66 960,60 990,67 1020,57 1050,52 1080,58 1110,48 1140,42 1170,32 1200,22"/>
-      <polyline stroke="#34d399" stroke-width="1" opacity="0.28"
-        points="0,160 30,158 60,164 90,155 120,152 150,158 180,149 210,144 240,150 270,140 300,135 330,142 360,133 390,128 420,124 450,130 480,122 510,116 540,122 570,113 600,108 630,115 660,106 690,101 720,108 750,98 780,93 810,100 840,91 870,86 900,92 930,82 960,77 990,84 1020,75 1050,70 1080,76 1110,67 1140,62 1170,52 1200,42"/>
-      <polyline stroke="#34d399" stroke-width="1" opacity="0.2"
-        points="0,160 30,157 60,163 90,156 120,153 150,160 180,153 210,148 240,155 270,147 300,141 330,149 360,141 390,136 420,132 450,139 480,132 510,126 540,132 570,124 600,118 630,125 660,117 690,112 720,119 750,111 780,106 810,113 840,105 870,100 900,106 930,98 960,93 990,100 1020,93 1050,88 1080,94 1110,87 1140,80 1170,72 1200,62"/>
-      <polyline stroke="#34d399" stroke-width="1" opacity="0.13"
-        points="0,160 30,158 60,165 90,158 120,156 150,162 180,156 210,151 240,157 270,151 300,146 330,152 360,146 390,141 420,138 450,144 480,138 510,133 540,139 570,132 600,127 630,133 660,127 690,122 720,129 750,122 780,117 810,124 840,118 870,113 900,119 930,113 960,108 990,115 1020,109 1050,104 1080,110 1110,104 1140,98 1170,95 1200,92"/>
-      <polyline stroke="#34d399" stroke-width="1" opacity="0.09"
-        points="0,160 30,159 60,165 90,159 120,157 150,163 180,158 210,153 240,159 270,154 300,149 330,155 360,150 390,145 420,143 450,149 480,144 510,139 540,145 570,139 600,134 630,140 660,135 690,130 720,136 750,130 780,126 810,132 840,127 870,122 900,128 930,123 960,119 990,125 1020,120 1050,115 1080,121 1110,116 1140,112 1170,114 1200,115"/>
-      <polyline stroke="#94a3b8" stroke-width="1" opacity="0.1"
-        points="0,160 30,160 60,166 90,160 120,159 150,165 180,160 210,155 240,161 270,156 300,152 330,158 360,154 390,149 420,147 450,153 480,149 510,144 540,150 570,145 600,141 630,147 660,143 690,138 720,144 750,139 780,135 810,141 840,137 870,132 900,138 930,134 960,130 990,136 1020,132 1050,128 1080,134 1110,130 1140,127 1170,130 1200,132"/>
-      <polyline stroke="#94a3b8" stroke-width="1" opacity="0.07"
-        points="0,160 30,162 60,168 90,162 120,161 150,167 180,162 210,158 240,163 270,159 300,155 330,161 360,157 390,153 420,151 450,157 480,153 510,149 540,155 570,151 600,147 630,153 660,149 690,145 720,151 750,147 780,143 810,149 840,145 870,141 900,147 930,143 960,140 990,146 1020,143 1050,139 1080,145 1110,141 1140,139 1170,148 1200,158"/>
-      <polyline stroke="#f472b6" stroke-width="1" opacity="0.2"
-        points="0,160 30,162 60,157 90,163 120,161 150,156 180,162 210,158 240,162 270,158 300,163 330,158 360,164 390,160 420,165 450,160 480,166 510,161 540,166 570,162 600,167 630,163 660,168 690,164 720,170 750,165 780,170 810,166 840,172 870,168 900,174 930,170 960,175 990,170 1020,175 1050,171 1080,176 1110,172 1140,177 1170,174 1200,178"/>
-      <polyline stroke="#f472b6" stroke-width="1" opacity="0.26"
-        points="0,160 30,163 60,158 90,165 120,163 150,169 180,163 210,170 240,165 270,171 300,166 330,173 360,168 390,174 420,170 450,176 480,171 510,178 540,173 570,179 600,175 630,181 660,176 690,182 720,178 750,184 780,180 810,186 840,182 870,188 900,184 930,190 960,186 990,192 1020,188 1050,194 1080,190 1110,196 1140,192 1170,196 1200,198"/>
-      <polyline stroke="#fb7185" stroke-width="1" opacity="0.3"
-        points="0,160 30,165 60,172 90,166 120,174 150,180 180,174 210,181 240,176 270,183 300,178 330,185 360,180 390,187 420,183 450,190 480,185 510,192 540,188 570,195 600,190 630,197 660,193 690,200 720,196 750,203 780,199 810,206 840,202 870,208 900,205 930,212 960,208 990,214 1020,210 1050,217 1080,214 1110,220 1140,216 1170,222 1200,228"/>
-      <polyline stroke="#fb7185" stroke-width="1" opacity="0.24"
-        points="0,160 30,166 60,174 90,167 120,176 150,183 180,177 210,185 240,180 270,188 300,183 330,191 360,186 390,194 420,190 450,198 480,193 510,201 540,197 570,205 600,200 630,208 660,204 690,212 720,208 750,216 780,212 810,220 840,216 870,224 900,220 930,228 960,224 990,232 1020,228 1050,236 1080,232 1110,240 1140,237 1170,244 1200,252"/>
-      <polyline stroke="#fb7185" stroke-width="1" opacity="0.3"
-        points="0,160 30,167 60,176 90,169 120,179 150,187 180,181 210,190 240,185 270,194 300,190 330,199 360,194 390,203 420,199 450,208 480,204 510,213 540,209 570,218 600,214 630,223 660,219 690,228 720,225 750,234 780,230 810,239 840,236 870,245 900,241 930,250 960,247 990,256 1020,252 1050,261 1080,258 1110,267 1140,264 1170,271 1200,275"/>
-      <polyline stroke="#fb7185" stroke-width="1" opacity="0.28"
-        points="0,160 30,168 60,178 90,171 120,181 150,190 180,184 210,194 240,189 270,199 300,195 330,205 360,200 390,210 420,206 450,216 480,212 510,222 540,218 570,228 600,224 630,234 660,230 690,240 720,237 750,247 780,243 810,253 840,250 870,260 900,257 930,267 960,264 990,274 1020,270 1050,280 1080,277 1110,287 1140,284 1170,291 1200,295"/>
-      <polyline stroke="#f43f5e" stroke-width="1.6" opacity="0.55"
-        points="0,160 30,170 60,182 90,174 120,185 150,195 180,188 210,199 240,194 270,205 300,201 330,212 360,207 390,218 420,214 450,225 480,221 510,232 540,228 570,239 600,235 630,246 660,242 690,253 720,250 750,261 780,257 810,268 840,265 870,276 900,272 930,283 960,280 990,291 1020,287 1050,298 1080,295 1110,306 1140,302 1170,308 1200,312"/>
-    </g>
-  </svg>
+  <!-- Live candlestick chart -->
+  <canvas id="hero-canvas" class="hero-chart" aria-hidden="true" style="opacity:0.72"></canvas>
 
   <div class="wide">
     <div class="hero-inner">
       <div class="hero-content">
-        <img src="images/logo.png" alt="IQM" class="hero-logo">
-        <div class="hero-wordmark">Irvine Quantitative Management</div>
-        <div class="hero-algo">UCI's premier <span class="algo-grad">algorithmic trading</span> club.</div>
+        <img src="images/logo.png" alt="AC" class="hero-logo">
+        <div class="hero-wordmark">UCI Quantitative Management</div>
+        <div class="hero-algo">UC Irvine's premier <span class="algo-grad">algorithmic trading</span> club.</div>
         <div class="btn-row">
           <a href="about.html#join" class="btn-primary">Get Involved</a>
           <a href="about.html" class="btn-secondary">Learn More</a>
@@ -623,14 +574,14 @@
   <div class="section" style="padding-bottom:0">
     <div class="why-wrap">
       <div class="why-card fade-up" style="transition-delay:0s">
-        <span class="why-tag">Why Join?</span>
-        <h3>The same systems top quant firms build — built by us.</h3>
-        <p>Order management systems, low-latency data pipelines, signal research infrastructure — the architecture we're building mirrors what Two Sigma, Citadel, and Jane Street run in production. We use Rust because microseconds matter and correctness is non-negotiable. If it's sloppy, it doesn't ship.</p>
+        <span class="why-tag">Why Join</span>
+        <h3>We build every part of a quantitative fund.</h3>
+        <p>A real quant fund requires a lot of infrastructure: data processors that collect and clean market data reliably, backtesting systems that simulate how a strategy would have performed historically. The research side designs the actual strategies using statistics, machine learning, and deep learning. Members will get to work across all of these, depending on what interests them.</p>
       </div>
       <div class="why-card fade-up" style="transition-delay:0.1s">
         <span class="why-tag">Ownership</span>
-        <h3>Real ownership. Genuinely hard problems.</h3>
-        <p>Members aren't assigned tasks — they take full ownership of real systems. Your strategy, your code, your results tracked against a shared portfolio. This is production-grade engineering at the systems level: performance matters, the bar is high, and the work will push you further than any class will.</p>
+        <h3>Every project ends with something you can share.</h3>
+        <p>When a project wraps up, members write a short technical post covering what they built, how it works, and what the results looked like. It lives on the club site and gives you something concrete to point to. It is a good way to document your thinking and makes your work visible to other members, alumni, and anyone else who comes across it.</p>
       </div>
     </div>
   </div>
@@ -718,9 +669,9 @@
 
 <footer>
   <span style="display:flex; align-items:center; gap:0.6rem;">
-    <img src="images/logo.png" alt="IQM" style="height:20px; width:auto; opacity:0.4;"
+    <img src="images/logo.png" alt="AC" style="height:20px; width:auto; opacity:0.4;"
          onerror="this.style.display='none'">
-    Irvine Quantitative Management &middot; UC Irvine
+    UCI Quantitative Management &middot; UC Irvine
   </span>
   <span>Student organization &middot; Not affiliated with UCI Financial Services</span>
 </footer>
@@ -782,6 +733,147 @@
       requestAnimationFrame(frame);
     }
     frame();
+  })();
+
+  /* ── LIVE CANDLESTICK CHART ── */
+  (function() {
+    const canvas = document.getElementById('hero-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    function newCandle(prev) {
+      const open  = prev;
+      const move  = (Math.random() - 0.46) * 2.2;
+      const close = open + move;
+      const h = Math.max(open, close) + Math.random() * 1.1;
+      const l = Math.min(open, close) - Math.random() * 1.1;
+      return { open, high: h, low: l, close, vol: 0.25 + Math.random() * 0.75 };
+    }
+
+    const data = [];
+    let px = 4382.15;
+    for (let i = 0; i < 220; i++) { const c = newCandle(px); data.push(c); px = c.close; }
+
+    const CW = 10, GAP = 5, STEP = 15, SPEED = 15;
+    let offset = 0, last_t = null;
+
+    function draw() {
+      const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+
+      const chartTop = H * 0.07, chartH = H * 0.62;
+      const volTop = chartTop + chartH + H * 0.04, volH = H * 0.10;
+
+      const nVis  = Math.ceil(W / STEP) + 2;
+      const frac  = offset % STEP;
+      const shift = Math.floor(offset / STEP);
+      const end   = data.length - shift;
+      const start = Math.max(0, end - nVis);
+      const sl    = data.slice(start, end);
+      if (sl.length < 3) return;
+
+      let lo = Infinity, hi = -Infinity;
+      sl.forEach(d => { lo = Math.min(lo, d.low); hi = Math.max(hi, d.high); });
+      const pad = (hi - lo) * 0.1; lo -= pad; hi += pad;
+      const toY = p => chartTop + chartH * (1 - (p - lo) / (hi - lo));
+
+      /* grid */
+      for (let i = 0; i <= 4; i++) {
+        const y = chartTop + (i / 4) * chartH;
+        const price = hi - (i / 4) * (hi - lo);
+        ctx.strokeStyle = 'rgba(99,102,241,0.07)';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        ctx.fillStyle = 'rgba(148,163,184,0.3)';
+        ctx.font = "9px 'SF Mono','Courier New',monospace";
+        ctx.textAlign = 'right';
+        ctx.fillText(price.toFixed(2), W - 10, y - 3);
+      }
+
+      /* candles + volume */
+      sl.forEach((d, i) => {
+        const x  = W - (sl.length - i) * STEP + frac;
+        const mx = x + CW / 2;
+        const bull = d.close >= d.open;
+        const col  = bull ? '#34d399' : '#f43f5e';
+        const bTop = toY(Math.max(d.open, d.close));
+        const bBot = toY(Math.min(d.open, d.close));
+        const bH   = Math.max(1.5, bBot - bTop);
+
+        ctx.globalAlpha = 0.6;
+        ctx.strokeStyle = col; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(mx, toY(d.high)); ctx.lineTo(mx, toY(d.low)); ctx.stroke();
+
+        ctx.globalAlpha = 1;
+        if (bull) {
+          ctx.fillStyle = col; ctx.globalAlpha = 0.85;
+          ctx.fillRect(x, bTop, CW, bH);
+        } else {
+          ctx.globalAlpha = 0.12; ctx.fillStyle = col; ctx.fillRect(x, bTop, CW, bH);
+          ctx.globalAlpha = 0.6;  ctx.strokeStyle = col; ctx.lineWidth = 1;
+          ctx.strokeRect(x + 0.5, bTop + 0.5, CW - 1, Math.max(1, bH - 1));
+        }
+        ctx.globalAlpha = 1;
+
+        const vH = d.vol * volH;
+        ctx.globalAlpha = bull ? 0.2 : 0.15;
+        ctx.fillStyle = col;
+        ctx.fillRect(x, volTop + volH - vH, CW, vH);
+        ctx.globalAlpha = 1;
+      });
+
+      /* EMA 20 — indigo glow */
+      const k20 = 2 / 21, e20 = [];
+      sl.forEach((d, i) => e20.push(i === 0 ? d.close : d.close * k20 + e20[i-1] * (1 - k20)));
+      ctx.beginPath(); ctx.strokeStyle = '#818cf8'; ctx.lineWidth = 1.5;
+      ctx.shadowColor = '#818cf8'; ctx.shadowBlur = 12;
+      e20.forEach((v, i) => {
+        const x = W - (sl.length - i) * STEP + frac + CW / 2;
+        if (x < 0) return; i === 0 ? ctx.moveTo(x, toY(v)) : ctx.lineTo(x, toY(v));
+      });
+      ctx.stroke(); ctx.shadowBlur = 0;
+
+      /* EMA 50 — orange, subtle */
+      const k50 = 2 / 51, e50 = [];
+      sl.forEach((d, i) => e50.push(i === 0 ? d.close : d.close * k50 + e50[i-1] * (1 - k50)));
+      ctx.beginPath(); ctx.strokeStyle = '#fb923c'; ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.38; ctx.shadowColor = '#fb923c'; ctx.shadowBlur = 6;
+      e50.forEach((v, i) => {
+        const x = W - (sl.length - i) * STEP + frac + CW / 2;
+        if (x < 0) return; i === 0 ? ctx.moveTo(x, toY(v)) : ctx.lineTo(x, toY(v));
+      });
+      ctx.stroke(); ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+
+      /* latest price dashed line + badge */
+      const last  = sl[sl.length - 1];
+      const lastX = W - STEP + frac + CW / 2;
+      const lastY = toY(last.close);
+      const bull  = last.close >= last.open;
+
+      ctx.setLineDash([3, 6]);
+      ctx.strokeStyle = 'rgba(129,140,248,0.28)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, lastY); ctx.lineTo(W, lastY); ctx.stroke();
+      ctx.setLineDash([]);
+
+      /* glowing dot */
+      ctx.beginPath(); ctx.arc(lastX, lastY, 3, 0, Math.PI * 2);
+      ctx.fillStyle = bull ? '#34d399' : '#f43f5e';
+      ctx.shadowColor = bull ? '#34d399' : '#f43f5e'; ctx.shadowBlur = 18;
+      ctx.fill(); ctx.shadowBlur = 0;
+
+      /* left fade */
+      const lg = ctx.createLinearGradient(0, 0, W * 0.13, 0);
+      lg.addColorStop(0, 'rgba(6,8,16,1)'); lg.addColorStop(1, 'rgba(6,8,16,0)');
+      ctx.fillStyle = lg; ctx.fillRect(0, 0, W * 0.13, H);
+    }
+
+    function render() {
+      const W = canvas.offsetWidth, H = canvas.offsetHeight;
+      if (canvas.width !== W || canvas.height !== H) { canvas.width = W; canvas.height = H; }
+      draw();
+    }
+    render();
+    window.addEventListener('resize', render);
   })();
 </script>
 </body>
